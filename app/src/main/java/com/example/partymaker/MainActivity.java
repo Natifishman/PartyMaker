@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             //set actionbar background
             Drawable d = getResources().getDrawable(R.drawable.fade);
             actionBar.setBackgroundDrawable(d);
-            //Set bar above all
+            //Set bar above everything
             actionBar.setElevation(8f);
         }
 
