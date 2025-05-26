@@ -90,6 +90,7 @@ dependencies {
     implementation("de.hdodenhof:circleimageview:3.1.0")
     implementation(libs.androidx.constraintlayout)
     implementation(libs.material)
+    implementation(libs.firebase.firestore)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -97,4 +98,15 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // OpenAI API
+    implementation("com.aallam.openai:openai-client:3.5.0")
+    implementation("io.ktor:ktor-client-android:2.3.7")
+
+    // Google Auth dependencies - Sign in
+    implementation("com.google.android.gms:play-services-auth:20.7.0")
+
+    // OkHttp and org.json dependencies
+    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("org.json:json:20220320")
 }

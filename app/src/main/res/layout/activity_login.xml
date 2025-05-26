@@ -14,6 +14,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- HEADER עם תמונה וכפתור מידע -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="280dp">
@@ -23,7 +24,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-
                 android:background="#00000000"
                 android:contentDescription="@string/about_us"
                 android:src="@drawable/bubble" />
@@ -38,6 +38,7 @@
                 app:srcCompat="@drawable/cake" />
         </RelativeLayout>
 
+        <!-- כותרת התחברות -->
         <TextView
             android:id="@+id/loginTitle"
             android:layout_width="wrap_content"
@@ -49,6 +50,7 @@
             android:textStyle="bold"
             android:layout_marginTop="16dp"/>
 
+        <!-- אימייל -->
         <EditText
             android:id="@+id/etEmailL"
             android:layout_width="match_parent"
@@ -64,6 +66,7 @@
             android:textColorHint="#757575"
             tools:ignore="VisualLintTextFieldSize" />
 
+        <!-- סיסמה -->
         <EditText
             android:id="@+id/etPasswordL"
             android:layout_width="match_parent"
@@ -79,6 +82,7 @@
             android:textColorHint="#757575"
             tools:ignore="VisualLintTextFieldSize" />
 
+        <!-- Stay connected -->
         <CheckBox
             android:id="@+id/cbRememberMe"
             android:layout_width="wrap_content"
@@ -89,6 +93,7 @@
             android:text="@string/stay_connected"
             android:textColor="#696969" />
 
+        <!-- התחברות + גוגל -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -114,6 +119,7 @@
                 tools:ignore="VisualLintButtonSize" />
         </LinearLayout>
 
+        <!-- הרשמה -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -140,8 +146,7 @@
                 android:textColor="#3B82F6"
                 tools:ignore="TextContrastCheck" />
         </LinearLayout>
-
-
+        <!-- שכחת סיסמה -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

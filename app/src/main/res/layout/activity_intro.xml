@@ -5,6 +5,7 @@
     android:id="@+id/activity_intro"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context="com.example.partymaker.Intro">
 
     <androidx.viewpager.widget.ViewPager
