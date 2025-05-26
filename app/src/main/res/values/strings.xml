@@ -18,9 +18,6 @@
     <string name="app_logo">Logo</string>
     <string name="about_info">About Us</string>
 
-    <!-- Google Auth -->
-    <string name="default_web_client_id">147371928837-clr49oghmdrdbhk5aqfuinu4rekl19dt.apps.googleusercontent.com</string>
-
     <!-- These can be safely kept empty since they're defined above with different names -->
     <string name="hint_email">Email</string>
     <string name="hint_password">Password</string>
@@ -74,7 +71,7 @@
     <string name="your_party_s_location">Your Party\'s Location</string>
     <string name="your_party_s_date">Your Party\'s Date</string>
     <string name="name">Name</string>
-    <string name="adress">Address</string>
+    <string name="adress">Adress</string>
     <string name="day">Day</string>
     <string name="month">Month</string>
     <string name="year">Year</string>
@@ -84,40 +81,6 @@
     <string name="hours">Hours</string>
     <string name="done">Done</string>
     <string name="todo">TODO</string>
-    <string name="username">username</string>
-    <string name="email_userlist">email</string>
-    <string name="press_here">Press Here</string>
-    <string name="cake">CAKE</string>
-    <string name="about_us">About Us</string>
-    <string name="login_page">Login Page</string>
-    <string name="Login">Login</string>
-    <string name="dont_have_an_account">dont have an account?</string>
-    <string name="Press_Here">Press Here</string>
-    <string name="reset">Reset</string>
-    <string name="your_password">your password</string>
-    <string name="reset_you_password">Reset you password</string>
-    <string name="reset_your_password">Reset your password</string>
-    <string name="version_1_0">Version 1.0</string>
-    <string name="make_every_party_unforgettable">Make Every Party Unforgettable</string>
-    <string name="partymaker">PartyMaker</string>
-    <string name="logo">LOGO</string>
-    <string name="admin_options">Admin Options</string>
-    <string name="admin_email">Admin Email</string>
-    <string name="location">Location</string>
-    <string name="date">Date</string>
-    <string name="press_to_see_time">press to see time</string>
-    <string name="press_to_see_date">press to see date</string>
-    <string name="invited">invited</string>
-    <string name="delete_people">Delete People</string>
-    <string name="entry">entry</string>
-    <string name="group_options">Group Options</string>
-    <string name="change_price">Change Price</string>
-    <string name="arrow">arrow</string>
-    <string name="calendar">calendar</string>
-    <string name="options">options</string>
-    <string name="leave">leave</string>
-    <string name="input_your_friend_s_email">Input your friend\'s email</string>
-    <string name="type_in_your_friend_s_email_above_and_press_delete_friend_to_delete_him_from_current_group">Type in your friend\'s email above and press delete Friend to delete him from current group</string>
 
     <!-- Arrays for date/time pickers -->
     <string-array name="array_days">
@@ -168,11 +131,11 @@
         <item>December</item>
     </string-array>
     <string-array name="array_years">
-        <item>2025</item>
-        <item>2026</item>
-        <item>2027</item>
-        <item>2028</item>
-        <item>2029</item>
+        <item>2018</item>
+        <item>2019</item>
+        <item>2020</item>
+        <item>2021</item>
+        <item>2022</item>
     </string-array>
     <string-array name="array_hours">
         <item>01:00</item>

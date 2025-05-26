@@ -149,4 +149,14 @@
             android:textColor="#0081d1"
             android:visibility="invisible" />
     </RelativeLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@android:drawable/ic_dialog_email"
+        app:fabSize="normal"
+        android:contentDescription="צ'אט עם עוזר בינה מלאכותית"/>
 </LinearLayout>

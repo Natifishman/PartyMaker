@@ -6,95 +6,91 @@
     android:layout_height="match_parent"
     android:background="@drawable/background2"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:fitsSystemWindows="true"
     tools:context="com.example.partymaker.Register">
 
     <ImageView
         android:id="@+id/imgRegister"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="314dp"
+        android:layout_height="162dp"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp"
-        app:srcCompat="@drawable/cake2" />
+        app:srcCompat="@drawable/cake2"
+        android:layout_marginTop="80dp"/>
 
     <TextView
         android:id="@+id/loginTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50px"
         android:text="Register Page"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#A93838"
+        android:textColorLink="#A93838"
         android:textStyle="bold" />
 
     <EditText
         android:id="@+id/etEmailR"
-        android:layout_width="match_parent"
+        android:layout_width="262dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:autofillHints=""
-        android:background="@drawable/edittext_background"
+        android:layout_gravity="center"
+        android:layout_marginTop="50px"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:padding="12dp"
         android:textAlignment="center" />
 
     <EditText
         android:id="@+id/etUsername"
-        android:layout_width="match_parent"
+        android:layout_width="262dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:autofillHints=""
-        android:background="@drawable/edittext_background"
+        android:layout_gravity="center"
         android:hint="Username"
-        android:inputType="text"
-        android:padding="12dp"
+        android:layout_marginTop="20px"
+        android:inputType="textEmailAddress"
         android:textAlignment="center" />
 
     <EditText
         android:id="@+id/etPasswordR"
-        android:layout_width="match_parent"
+        android:layout_width="264dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:autofillHints=""
-        android:background="@drawable/edittext_background"
+        android:layout_gravity="center"
+        android:layout_marginTop="30px"
         android:hint="Password"
         android:inputType="textPassword"
-        android:padding="12dp"
         android:textAlignment="center" />
 
     <Button
         android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="#A93838"
-        android:padding="12dp"
-        android:text="Register"
-        android:textColor="#FFFFFF"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="188dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="24dp"
-        android:orientation="horizontal">
+        android:layout_marginTop="50px"
+        android:text="Register" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/textView"
+            android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:text="Have an account?"
-            android:textColor="#444444" />
+            android:layout_gravity="center"
+            android:layout_marginStart="98dp"
+            android:text="have an account?"
+            android:layout_alignBaseline="@+id/btnPressR"
+            android:layout_alignParentStart="true" />
 
         <Button
             android:id="@+id/btnPressR"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:text=" Press Here"
+            android:background="#00ffffff"
+            android:text="Press Here"
+            android:textAllCaps="false"
             android:textColor="#8800ff"
-            android:textStyle="bold" />
-    </LinearLayout>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="87dp" />
+    </RelativeLayout>
+
 </LinearLayout>
