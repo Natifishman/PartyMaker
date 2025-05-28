@@ -31,16 +31,20 @@ import androidx.core.content.ContextCompat;
 import com.example.partymaker.data.DBref;
 import com.example.partymaker.data.Group;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Objects;
+import android.app.DatePickerDialog;
+import android.widget.TimePicker;
 
 public class AddGroup extends AppCompatActivity {
   private Button btnAddGroup, btnNext1, btnNext2, btnBack1, btnBack2, btnDone;
-  private TextView tvPartyName, tvPartyLocation, tvPartyDate, tvGroupPicture, tvHours;
+  private TextView tvPartyName, tvPartyLocation, tvPartyDate, tvGroupPicture, tvHours, tvSelectedDate;
   private EditText etPartyName, etPartyLocation;
   private ImageView imgLogin, imgGroupPicture;
   private String GroupKey1, DaysSelected, MonthsSelected, YearsSelected, HoursSelected;
   private CheckBox cbGroupType;
-  private Spinner spnDays, spnMonths, spnYears, spnHours;
+  private Calendar selectedDate;
+  private TimePicker timePicker;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -82,38 +86,18 @@ public class AddGroup extends AppCompatActivity {
     tvPartyDate = findViewById(R.id.tvPartyDate);
     tvGroupPicture = findViewById(R.id.tvGroupPicture);
     tvHours = findViewById(R.id.tvHours);
+    tvSelectedDate = findViewById(R.id.tvSelectedDate);
     etPartyName = findViewById(R.id.etPartyName);
     etPartyLocation = findViewById(R.id.etPartyLocation);
     cbGroupType = findViewById(R.id.cbGroupType);
-    spnDays = findViewById(R.id.spnDateDay);
-    spnMonths = findViewById(R.id.spnDateMonth);
-    spnYears = findViewById(R.id.spnDateYear);
-    spnHours = findViewById(R.id.spnHours);
-    // spinner adapter for days
-    ArrayAdapter<CharSequence> daysAdapter =
-        ArrayAdapter.createFromResource(
-            this, R.array.array_days, android.R.layout.simple_spinner_item);
-    daysAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    // spinner adapter for months
-    ArrayAdapter<CharSequence> monthsAdapter =
-        ArrayAdapter.createFromResource(
-            this, R.array.array_months, android.R.layout.simple_spinner_item);
-    monthsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    // spinner adapter for years
-    ArrayAdapter<CharSequence> yearsAdapter =
-        ArrayAdapter.createFromResource(
-            this, R.array.array_years, android.R.layout.simple_spinner_item);
-    yearsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    selectedDate = Calendar.getInstance();
+    timePicker = findViewById(R.id.timePicker);
+
     // spinner adapter for hours
     ArrayAdapter<CharSequence> hoursAdapter =
         ArrayAdapter.createFromResource(
             this, R.array.array_hours, android.R.layout.simple_spinner_item);
     hoursAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-    // set adapter for each spinner
-    spnDays.setAdapter(daysAdapter);
-    spnMonths.setAdapter(monthsAdapter);
-    spnYears.setAdapter(yearsAdapter);
-    spnHours.setAdapter(hoursAdapter);
 
     evantHandler();
   }
@@ -137,14 +121,13 @@ public class AddGroup extends AppCompatActivity {
           cbGroupType.setVisibility(View.INVISIBLE);
           tvPartyDate.setVisibility(View.VISIBLE);
           tvHours.setVisibility(View.VISIBLE);
-          spnDays.setVisibility(View.VISIBLE);
-          spnMonths.setVisibility(View.VISIBLE);
-          spnYears.setVisibility(View.VISIBLE);
-          spnHours.setVisibility(View.VISIBLE);
+          tvSelectedDate.setVisibility(View.VISIBLE);
+          timePicker.setVisibility(View.VISIBLE);
           btnNext2.setVisibility(View.INVISIBLE);
           btnAddGroup.setVisibility(View.VISIBLE);
           btnBack1.setVisibility(View.INVISIBLE);
           btnBack2.setVisibility(View.VISIBLE);
+          showDatePicker();
         });
     btnBack1.setOnClickListener(
         v -> {
@@ -163,10 +146,8 @@ public class AddGroup extends AppCompatActivity {
           cbGroupType.setVisibility(View.VISIBLE);
           tvPartyDate.setVisibility(View.INVISIBLE);
           tvHours.setVisibility(View.INVISIBLE);
-          spnDays.setVisibility(View.INVISIBLE);
-          spnMonths.setVisibility(View.INVISIBLE);
-          spnYears.setVisibility(View.INVISIBLE);
-          spnHours.setVisibility(View.INVISIBLE);
+          tvSelectedDate.setVisibility(View.INVISIBLE);
+          timePicker.setVisibility(View.INVISIBLE);
           btnNext2.setVisibility(View.VISIBLE);
           btnAddGroup.setVisibility(View.INVISIBLE);
           btnBack1.setVisibility(View.VISIBLE);
@@ -212,6 +193,16 @@ public class AddGroup extends AppCompatActivity {
           p.setGroupDays(DaysSelected);
           p.setGroupMonths(MonthsSelected);
           p.setGroupYears(YearsSelected);
+          // Get hour and minute from TimePicker
+          int hour, minute;
+          if (android.os.Build.VERSION.SDK_INT >= 23) {
+            hour = timePicker.getHour();
+            minute = timePicker.getMinute();
+          } else {
+            hour = timePicker.getCurrentHour();
+            minute = timePicker.getCurrentMinute();
+          }
+          HoursSelected = String.format("%02d:%02d", hour, minute);
           p.setGroupHours(HoursSelected);
 
           // create unique key for Group
@@ -244,10 +235,8 @@ public class AddGroup extends AppCompatActivity {
           imgLogin.setVisibility(View.INVISIBLE);
           tvPartyDate.setVisibility(View.INVISIBLE);
           tvHours.setVisibility(View.INVISIBLE);
-          spnDays.setVisibility(View.INVISIBLE);
-          spnMonths.setVisibility(View.INVISIBLE);
-          spnYears.setVisibility(View.INVISIBLE);
-          spnHours.setVisibility(View.INVISIBLE);
+          tvSelectedDate.setVisibility(View.INVISIBLE);
+          timePicker.setVisibility(View.INVISIBLE);
           btnBack2.setVisibility(View.INVISIBLE);
           btnAddGroup.setVisibility(View.INVISIBLE);
           cbGroupType.setVisibility(View.INVISIBLE);
@@ -274,46 +263,7 @@ public class AddGroup extends AppCompatActivity {
           startActivityForResult(Intent.createChooser(i, "Select Picture"), 100);
           tvGroupPicture.setVisibility(View.INVISIBLE);
         });
-    spnDays.setOnItemSelectedListener(
-        new AdapterView.OnItemSelectedListener() {
-          @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            DaysSelected = parent.getItemAtPosition(position).toString();
-          }
-
-          @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
-        });
-    spnMonths.setOnItemSelectedListener(
-        new AdapterView.OnItemSelectedListener() {
-          @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            MonthsSelected = parent.getItemAtPosition(position).toString();
-          }
-
-          @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
-        });
-    spnYears.setOnItemSelectedListener(
-        new AdapterView.OnItemSelectedListener() {
-          @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            YearsSelected = parent.getItemAtPosition(position).toString();
-          }
-
-          @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
-        });
-    spnHours.setOnItemSelectedListener(
-        new AdapterView.OnItemSelectedListener() {
-          @Override
-          public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-            HoursSelected = parent.getItemAtPosition(position).toString();
-          }
-
-          @Override
-          public void onNothingSelected(AdapterView<?> parent) {}
-        });
+    tvSelectedDate.setOnClickListener(v -> showDatePicker());
     btnDone.setOnClickListener(
         v -> {
           Intent intent = new Intent(getBaseContext(), MainActivity.class);
@@ -373,5 +323,35 @@ public class AddGroup extends AppCompatActivity {
   public boolean onCreateOptionsMenu(Menu menu) {
     getMenuInflater().inflate(R.menu.menu, menu);
     return true;
+  }
+
+  private void showDatePicker() {
+    DatePickerDialog datePickerDialog = new DatePickerDialog(
+        this,
+        (view, year, month, dayOfMonth) -> {
+          selectedDate.set(year, month, dayOfMonth);
+          updateSelectedDate();
+        },
+        selectedDate.get(Calendar.YEAR),
+        selectedDate.get(Calendar.MONTH),
+        selectedDate.get(Calendar.DAY_OF_MONTH)
+    );
+    datePickerDialog.show();
+  }
+  
+  private void updateSelectedDate() {
+    // Get month name in English
+    String monthName = new SimpleDateFormat("MMMM", Locale.ENGLISH).format(selectedDate.getTime());
+    
+    // Update the selected date text
+    tvSelectedDate.setText(String.format("%d %s %d", 
+        selectedDate.get(Calendar.DAY_OF_MONTH),
+        monthName,
+        selectedDate.get(Calendar.YEAR)));
+    
+    // Store the values
+    DaysSelected = String.valueOf(selectedDate.get(Calendar.DAY_OF_MONTH));
+    MonthsSelected = monthName;
+    YearsSelected = String.valueOf(selectedDate.get(Calendar.YEAR));
   }
 }
