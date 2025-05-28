@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.partymaker.EditProfile"
     android:orientation="vertical"
     android:background="@drawable/background4"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.partymaker.EditProfile">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imgProfile"

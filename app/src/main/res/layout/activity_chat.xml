@@ -22,11 +22,19 @@
 
         <EditText
             android:id="@+id/etMessage"
-            android:layout_width="370dp"
+            android:layout_width="300dp"
             android:layout_height="40dp"
             android:backgroundTint="#1986ed"
             android:hint="Type a message"
             android:inputType="textPersonName" />
+
+        <ImageButton
+            android:id="@+id/btnGpt"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toEndOf="@id/etMessage"
+            android:background="#00000000"
+            android:src="@android:drawable/ic_dialog_info" />
 
         <ImageButton
             android:id="@+id/btnSend"

@@ -42,6 +42,7 @@
         <activity android:name=".PublicGroups" />
         <activity android:name=".Register" />
         <activity android:name=".ResetPassword" />
+        <activity android:name=".GptChatActivity" />
     </application>
 
 </manifest>
