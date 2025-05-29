@@ -100,6 +100,7 @@
             android:text="@string/press_here"
             android:textColor="#8800ff"
             android:textStyle="bold"
-            android:layout_marginStart="5dp"/>
+            android:layout_marginStart="5dp"
+            android:textAllCaps="false"/>
     </LinearLayout>
 </LinearLayout>
