@@ -1,6 +1,5 @@
 package com.example.partymaker.data;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -54,14 +53,29 @@ public class ChatAdpter extends ArrayAdapter<ChatMessage> {
             tvSender.setVisibility(View.GONE);
             spaceLeft.setVisibility(View.VISIBLE);
             spaceRight.setVisibility(View.GONE);
+            tvMessage.setTextColor(context.getResources().getColor(R.color.black));
         } else {
-            // הודעות של אחרים: יישור לשמאל, בועה כחולה, עם שם
+            // הודעות של אחרים: יישור לשמאל, בועה אפורה, עם שם
             bubbleLayout.setBackgroundResource(R.drawable.bg_message_bubble);
             tvSender.setText(temp.getMessageUser());
             tvSender.setVisibility(View.VISIBLE);
             spaceLeft.setVisibility(View.GONE);
             spaceRight.setVisibility(View.VISIBLE);
+            tvMessage.setTextColor(context.getResources().getColor(R.color.black));
         }
+
+        // הוסף מרווח בין הודעות
+        if (position > 0) {
+            ChatMessage prevMessage = MessageList.get(position - 1);
+            if (prevMessage.getMessageUser().equals(temp.getMessageUser())) {
+                // אם זו אותה משתמש, הקטן את המרווח
+                view.setPadding(0, 2, 0, 0);
+            } else {
+                // אם זה משתמש אחר, הגדל את המרווח
+                view.setPadding(0, 8, 0, 0);
+            }
+        }
+
         return view;
     }
 }
