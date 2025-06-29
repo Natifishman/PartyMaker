@@ -147,9 +147,9 @@ For detailed architecture documentation, see [ARCHITECTURE.docx](./ARCHITECTURE.
 
 We welcome contributions! Please follow these steps:
 
-1. **Fork the Repository**
+1. **Clone the Repository**
    ```bash
-   git fork https://github.com/yourusername/partymaker.git
+   git clone https://github.com/yourusername/partymaker.git
    ```
 
 2. **Create Feature Branch**
