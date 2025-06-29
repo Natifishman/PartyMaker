@@ -1,9 +1,14 @@
 package com.example.partymaker.data.model;
 
+/** Model representing a single chat message in a group conversation. */
 public class ChatMessage {
+  /** The message body. */
   private String messageText;
+  /** Sender's email address. */
   private String messageUser;
+  /** Time message was sent (yyyy-MM-dd HH:mm:ss). */
   private String messageTime;
+  /** Firebase key for this message. */
   private String MessageKey;
 
   public ChatMessage(

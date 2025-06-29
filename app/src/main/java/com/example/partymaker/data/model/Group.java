@@ -2,21 +2,37 @@ package com.example.partymaker.data.model;
 
 import java.util.HashMap;
 
+/** Data model representing a party group stored in Firebase. */
 public class Group {
+  /** Display name of the group. */
   private String groupName;
+  /** Unique key used as identifier in Firebase. */
   private String groupKey;
+  /** Optional textual location or coordinates. */
   private String groupLocation;
+  /** Email of the group admin. */
   private String adminKey;
+  /** Timestamp of creation. */
   private String createdAt;
+  /** Event day portion. */
   private String groupDays;
+  /** Event month portion. */
   private String groupMonths;
+  /** Event year portion. */
   private String groupYears;
+  /** Event time of day. */
   private String groupHours;
+  /** Price of the event. */
   private String groupPrice;
-  private int GroupType; // if 0 so Public group if 1 so Private group
+  /** 0 for public, 1 for private groups. */
+  private int GroupType;
+  /** Whether members can add other users. */
   private boolean CanAdd;
+  /** Map of user keys for invited friends. */
   private HashMap<String, Object> FriendKeys = new HashMap<>();
+  /** Map of user keys for confirmed attendees. */
   private HashMap<String, Object> ComingKeys = new HashMap<>();
+  /** Map of message keys belonging to this group. */
   private HashMap<String, Object> MessageKeys = new HashMap<>();
 
   public boolean isCanAdd() {

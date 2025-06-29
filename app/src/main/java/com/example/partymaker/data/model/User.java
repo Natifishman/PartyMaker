@@ -1,7 +1,11 @@
 package com.example.partymaker.data.model;
 
+/** Simple user profile model used across the app. */
 public class User {
-  private String Email, UserName;
+  /** User email used as a unique identifier. */
+  private String Email;
+  /** Display name chosen by the user. */
+  private String UserName;
 
   public String getEmail() {
     return Email;

@@ -3,7 +3,9 @@ package com.example.partymaker.utilities.groupBuilder;
 import com.example.partymaker.data.model.Group;
 import com.example.partymaker.ui.group.CreateGroupActivity;
 
-// Builder pattern for Group creation
+/**
+ * Helper implementing the builder pattern for constructing {@link Group} objects.
+ */
 public class GroupBuilder {
   private final Group group = new Group();
 

@@ -1,5 +1,6 @@
 package com.example.partymaker.utilities.groupBuilder;
 
+/** Helper model containing the date and time fields used when creating a group. */
 public class GroupDateTime {
   private final String day;
   private final String month;
