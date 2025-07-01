@@ -80,7 +80,8 @@
                 android:layout_toEndOf="@id/tvYourEntry"
                 android:text="@string/free"
                 android:layout_marginStart="5sp"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                tools:ignore="RelativeOverlap" />
 
 
         </RelativeLayout>
@@ -291,7 +292,8 @@
                     android:text="@string/press_to_see_date"
                     android:textColor="#1986ed"
                     android:textSize="10sp"
-                    android:visibility="invisible" />
+                    android:visibility="invisible"
+                    tools:ignore="SmallSp" />
             </androidx.cardview.widget.CardView>
             <!-- 2,1 -->
             <androidx.cardview.widget.CardView
@@ -311,7 +313,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -349,7 +352,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -472,7 +476,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -510,14 +515,13 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:id="@+id/imgAddFriend"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBottom="@+id/textView5"
-                        android:layout_centerHorizontal="true"
                         android:layout_gravity="center_horizontal"
                         android:contentDescription="@string/todo"
                         android:src="@drawable/ic_party_add" />
@@ -552,7 +556,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal|center_vertical"
                     android:layout_margin="16dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    tools:ignore="UseCompoundDrawables">
 
                     <ImageView
                         android:layout_width="wrap_content"
