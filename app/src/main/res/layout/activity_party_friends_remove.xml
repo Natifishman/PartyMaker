@@ -41,7 +41,7 @@
         android:drawablePadding="10dp"
         android:hint="@string/input_your_friend_s_email"
         android:inputType="textEmailAddress"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textColor="@color/white"
         android:minHeight="48dp"
         android:textColorHint="@color/white" />
@@ -51,7 +51,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/type_in_your_friend_s_email_above_and_press_delete_friend_to_delete_him_from_current_group"
-        android:textAlignment="center"
+        android:gravity="center"
         android:textColor="#0081d1"
         android:visibility="invisible" />
 

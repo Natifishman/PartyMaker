@@ -41,7 +41,7 @@
 
         <TextView
             android:id="@+id/tvYourEntry1"
-            android:layout_width="70dp"
+            android:layout_width="wrap_content"
             android:layout_below="@id/tvGroupName1"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dp"
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="45dp"
                     android:text="@string/location"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="#1986ed"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -159,7 +159,7 @@
                     android:layout_below="@+id/imgGroupDate"
                     android:layout_marginEnd="7dp"
                     android:text="@string/date"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="#1986ed"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -171,7 +171,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="30dp"
                     android:text="@string/_31"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="#1986ed"
                     android:textSize="40sp"
                     android:textStyle="bold"
@@ -184,7 +184,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginStart="30dp"
                     android:text="@string/at"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="#1986ed"
                     android:textSize="40sp"
                     android:textStyle="bold"
@@ -296,7 +296,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/join_group"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="#1986ed"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -335,7 +335,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/back"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="#1986ed"
                     android:textSize="18sp"
                     android:textStyle="bold" />

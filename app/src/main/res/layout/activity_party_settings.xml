@@ -19,10 +19,11 @@
             android:id="@+id/imgEditGroup"
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:layout_marginTop="40dp"
-            android:src="@drawable/ic_party_set_picture"
             android:layout_centerHorizontal="true"
-            android:clickable="true" />
+            android:layout_marginTop="40dp"
+            android:clickable="true"
+            android:contentDescription="@string/group_s_picture"
+            android:src="@drawable/ic_party_set_picture" />
 
         <TextView
             android:id="@+id/tvNameGroup"
@@ -30,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_below="@+id/imgEditGroup"
-            android:text="@string/groupname"
+            android:text="@string/group_name"
             android:textColor="@android:color/white"
             android:textSize="34sp" />
 
@@ -74,7 +75,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:id="@+id/imgType"
@@ -89,7 +91,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/public_group"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="#1986ed"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -114,7 +116,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:id="@+id/imgCanAdd"
@@ -129,7 +132,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/admin_add"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="#1986ed"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -154,7 +157,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -167,7 +171,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/delete_group"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="#1986ed"
                     android:textSize="18sp"
                     android:textStyle="bold" />
@@ -193,7 +197,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:layout_margin="16dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                tools:ignore="UseCompoundDrawables">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -206,7 +211,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/back"
-                    android:textAlignment="center"
+                    android:gravity="center"
                     android:textColor="#1986ed"
                     android:textSize="18sp"
                     android:textStyle="bold" />

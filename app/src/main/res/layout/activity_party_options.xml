@@ -37,7 +37,7 @@
                 android:layout_below="@id/tvAdminOptions"
                 android:layout_centerHorizontal="true"
                 android:text="@string/admin_email"
-                android:textAlignment="center"
+                android:gravity="center"
                 android:textColor="@color/black"
                 tools:ignore="TextSizeCheck" />
 
@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="45dp"
                         android:text="@string/location"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -128,7 +128,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="1dp"
                         android:text="@string/date"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -201,7 +201,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/remove_friend"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -240,7 +240,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/change_price"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -321,7 +321,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/back"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />

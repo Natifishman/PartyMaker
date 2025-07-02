@@ -57,7 +57,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
                 android:layout_marginStart="5dp"
                 android:text="@string/entry_price"
                 android:textColor="@android:color/white" />
@@ -131,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="45dp"
                         android:text="@string/location"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -188,7 +187,7 @@
                         android:layout_below="@+id/imgCalender"
                         android:layout_marginEnd="7dp"
                         android:text="@string/date"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -200,7 +199,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="30dp"
                         android:text="@string/_31"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="40sp"
                         android:textStyle="bold"
@@ -213,7 +212,7 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="30dp"
                         android:text="@string/at"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="40sp"
                         android:textStyle="bold"
@@ -327,7 +326,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/people_invited"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -366,7 +365,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/people_coming"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -409,7 +408,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="45dp"
                         android:text="@string/not_coming"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#ffffff"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -490,7 +489,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/Chat"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -531,7 +530,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/add_friends"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
@@ -570,7 +569,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/leave"
-                        android:textAlignment="center"
+                        android:gravity="center"
                         android:textColor="#1986ed"
                         android:textSize="18sp"
                         android:textStyle="bold" />
