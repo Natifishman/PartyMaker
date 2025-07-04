@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_home"
+        android:icon="@drawable/ic_cake_purple"
+        android:title="@string/my_parties"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_create_group"
+        android:icon="@drawable/ic_party_join"
+        android:title="@string/new_party"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_edit_profile"
+        android:icon="@drawable/ic_party_pencil"
+        android:title="@string/edit_profile"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_public_groups"
+        android:icon="@drawable/ic_cake"
+        android:title="@string/public_parties"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_refresh"
+        android:icon="@drawable/ic_cake"
+        android:title="Refresh"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_logout"
+        android:icon="@drawable/ic_party_leave"
+        android:title="@string/logout"
+        app:showAsAction="never" />
+</menu>

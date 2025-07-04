@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_party_screen"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.partymaker.ui.group.ChangeDateActivity">
+
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/ic_cake_black" />
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Spinner
+            android:id="@+id/spnDayDate"
+            android:layout_alignParentBottom="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="40dp"
+            android:hint="@string/day"
+            android:textAlignment="center" />
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_above="@+id/spnDayDate"
+            android:text="@string/days"
+            android:textAlignment="center" />
+
+        <Spinner
+            android:id="@+id/spnMonthDate"
+            android:layout_alignParentBottom="true"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="140dp"
+            android:hint="@string/month"
+            android:textAlignment="center" />
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="140dp"
+            android:layout_above="@+id/spnMonthDate"
+            android:text="@string/months"
+            android:textAlignment="center" />
+
+        <Spinner
+            android:id="@+id/spnYearDate"
+            android:layout_width="100dp"
+            android:layout_alignParentBottom="true"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="240dp"
+            android:hint="@string/year"
+            android:textAlignment="center" />
+        <TextView
+            android:textColor="@color/black"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="240dp"
+            android:layout_above="@+id/spnYearDate"
+            android:text="@string/years"
+            android:textAlignment="center" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:text="@string/pick_an_hour"
+            android:textColor="@color/black" />
+
+        <Spinner
+            android:id="@+id/spnHourDate"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:hint="@string/hours" />
+    </RelativeLayout>
+
+
+    <TextView
+        android:id="@+id/tvInstructions2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/choose_a_new_date_above"
+        android:textAlignment="center"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+
+    <Button
+        android:id="@+id/btnChangeDate"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp"
+        android:background="#106e6e6e"
+        android:shadowColor="@color/primaryGray"
+        android:shadowDx="-0"
+        android:shadowDy="-0"
+        android:shadowRadius="25"
+        android:text="@string/change_date"
+        android:textAllCaps="false"
+        android:textColor="#0081d1"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/btnHelp2"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="210dp"
+            android:background="#0000ffff"
+            android:text="Press Here"
+            android:textAllCaps="false"
+            android:textColor="#0081d1" />
+
+        <TextView
+            android:id="@+id/tvHelp2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/need_help"
+            android:textColor="#0081d1" />
+
+        <Button
+            android:id="@+id/btnHide2"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="200dp"
+            android:background="#0000ffff"
+            android:text="@string/hide_it"
+            android:textAllCaps="false"
+            android:textColor="#0081d1"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tvHide2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/got_help"
+            android:textColor="#0081d1"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</LinearLayout>

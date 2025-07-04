@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#98d7efff"
+    android:fitsSystemWindows="true">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgInvitedProfile"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_profile" />
+
+    <TextView
+        android:id="@+id/tvInvitedUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvInvitedEmail"
+        android:layout_alignParentTop="true"
+        android:text="@string/username"
+        android:textColor="#004f56"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tvInvitedEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvInvitedUsername"
+        android:layout_marginLeft="10dp"
+        android:layout_toEndOf="@+id/imgInvitedProfile"
+        android:text="@string/email"
+        android:textColor="#00796B" />
+
+    <ImageView
+        android:id="@+id/imgAdminFlag"
+        android:layout_width="25sp"
+        android:layout_height="25sp"
+        android:layout_marginTop="5sp"
+        android:layout_toEndOf="@+id/tvInvitedUsername"
+        android:contentDescription="@string/todo"
+        android:visibility="visible"
+
+        app:srcCompat="@drawable/ic_party_admin" />
+
+</RelativeLayout>

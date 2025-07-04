@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_party_screen"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.partymaker.ui.group.FriendsRemoveActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <ImageButton
+            android:id="@+id/btnBack4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/transparent"
+            android:layout_alignParentRight="true"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_menu_back"/>
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/ic_cake_black" />
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/etDeleteEmail"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:autofillHints=""
+        android:drawableStart="@drawable/ic_email"
+        android:background="@drawable/et_background_blue"
+        android:drawablePadding="10dp"
+        android:hint="@string/input_your_friend_s_email"
+        android:inputType="textEmailAddress"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:minHeight="48dp"
+        android:textColorHint="@color/white" />
+
+    <TextView
+        android:id="@+id/tvInstructions3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/type_in_your_friend_s_email_above_and_press_delete_friend_to_delete_him_from_current_group"
+        android:textAlignment="center"
+        android:textColor="#0081d1"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnDeleteFriend"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="280dp"
+        android:background="#106e6e6e"
+        android:shadowColor="@color/primaryGray"
+        android:shadowDx="-0"
+        android:shadowDy="-0"
+        android:shadowRadius="25"
+        android:text="@string/delete_friend"
+        android:textAllCaps="false"
+        android:textColor="#0081d1"
+        android:textSize="15sp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/btnHelp3"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="210dp"
+            android:background="#0000ffff"
+            android:text="@string/press_here"
+            android:textAllCaps="false"
+            android:textColor="#0081d1" />
+
+        <TextView
+            android:id="@+id/tvHelp3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/need_help"
+            android:textColor="#0081d1" />
+
+        <Button
+            android:id="@+id/btnHide3"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="200dp"
+            android:background="#0000ffff"
+            android:text="@string/hide_it"
+            android:textAllCaps="false"
+            android:textColor="#0081d1"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tvHide3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/got_help"
+            android:textColor="#0081d1"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Primary Colors -->
+    <color name="pink_100">#FFFFEEF4</color>
+
+    <!-- Standard Colors -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="teal">#039694</color>
+
+    <!-- App's 2 primary colors -->
+    <color name="primaryBlue">#0E81D1</color>
+    <color name="primaryGray">#E4E9EF</color>
+
+    <!-- Original color definitions -->
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorGray">#848484</color>
+
+    <!-- Screens background -->
+    <color name="bg_screen1">#4f8500fa</color>
+    <color name="bg_screen2">#4fed00fa</color>
+    <color name="bg_screen3">#4ffa009a</color>
+
+    <!-- dots active colors -->
+    <color name="dot_active">#565454</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_inactive">#000000</color>
+
+    <!-- App-specific semantic colors -->
+    <color name="colorBackground">@color/pink_100</color>
+
+    <!-- Theme -->
+    <color name="md_theme_primary">#006099</color>
+    <color name="md_theme_onPrimary">#FFFFFF</color>
+    <color name="md_theme_primaryContainer">#007AC0</color>
+    <color name="md_theme_onPrimaryContainer">#FDFCFF</color>
+    <color name="md_theme_secondary">#44617E</color>
+    <color name="md_theme_onSecondary">#FFFFFF</color>
+    <color name="md_theme_secondaryContainer">#BFDDFF</color>
+    <color name="md_theme_onSecondaryContainer">#44627F</color>
+    <color name="md_theme_tertiary">#804199</color>
+    <color name="md_theme_onTertiary">#FFFFFF</color>
+    <color name="md_theme_tertiaryContainer">#9B5AB4</color>
+    <color name="md_theme_onTertiaryContainer">#FFFBFF</color>
+    <color name="md_theme_error">#BA1A1A</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_errorContainer">#FFDAD6</color>
+    <color name="md_theme_onErrorContainer">#93000A</color>
+    <color name="md_theme_background">#F7F9FF</color>
+    <color name="md_theme_onBackground">#181C21</color>
+    <color name="md_theme_surface">#F7F9FF</color>
+    <color name="md_theme_onSurface">#181C21</color>
+    <color name="md_theme_surfaceVariant">#DBE3EF</color>
+    <color name="md_theme_onSurfaceVariant">#404751</color>
+    <color name="md_theme_outline">#707882</color>
+    <color name="md_theme_outlineVariant">#BFC7D2</color>
+    <color name="md_theme_inverseSurface">#2D3136</color>
+    <color name="md_theme_inverseOnSurface">#EEF1F7</color>
+    <color name="md_theme_inversePrimary">#98CBFF</color>
+    <color name="md_theme_primaryFixed">#CFE5FF</color>
+    <color name="md_theme_onPrimaryFixed">#001D33</color>
+    <color name="md_theme_primaryFixedDim">#98CBFF</color>
+    <color name="md_theme_onPrimaryFixedVariant">#004A77</color>
+    <color name="md_theme_secondaryFixed">#CFE5FF</color>
+    <color name="md_theme_onSecondaryFixed">#001D33</color>
+    <color name="md_theme_secondaryFixedDim">#ABC9EB</color>
+    <color name="md_theme_onSecondaryFixedVariant">#2B4965</color>
+    <color name="md_theme_tertiaryFixed">#F8D8FF</color>
+    <color name="md_theme_onTertiaryFixed">#320046</color>
+    <color name="md_theme_tertiaryFixedDim">#ECB1FF</color>
+    <color name="md_theme_onTertiaryFixedVariant">#682A82</color>
+    <color name="md_theme_surfaceDim">#D7DAE0</color>
+    <color name="md_theme_surfaceBright">#F7F9FF</color>
+    <color name="md_theme_surfaceContainerLowest">#FFFFFF</color>
+    <color name="md_theme_surfaceContainerLow">#F1F4FA</color>
+    <color name="md_theme_surfaceContainer">#EBEEF4</color>
+    <color name="md_theme_surfaceContainerHigh">#E5E8EF</color>
+    <color name="md_theme_surfaceContainerHighest">#E0E2E9</color>
+</resources>

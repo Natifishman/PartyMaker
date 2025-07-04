@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgGroupPicture"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:src="@drawable/ic_party_icon"
+        tools:ignore="ImageContrastCheck" />
+
+    <TextView
+        android:id="@+id/tvGroupName"
+        android:layout_width="match_parent"
+        android:layout_height="31dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="75dp"
+        android:text="@string/group_name"
+        android:textColor="@color/primaryBlue"
+        android:textSize="25sp"
+        tools:ignore="TextSizeCheck" />
+
+    <TextView
+        android:id="@+id/tvGroupDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvGroupName"
+        android:layout_marginLeft="75dp"
+        android:textColor="@color/black"
+        android:text="@string/date" />
+</RelativeLayout>

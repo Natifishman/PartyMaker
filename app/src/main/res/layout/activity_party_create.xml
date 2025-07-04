@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_party_screen_reverse"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.partymaker.ui.group.CreateGroupActivity">
+
+    <ImageView
+        android:id="@+id/imgLogin"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:contentDescription="@string/create_group_logo"
+        app:srcCompat="@drawable/ic_cake_create_party"
+         />
+
+    <TextView
+        android:id="@+id/tvPartyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imgLogin"
+        android:gravity="center"
+        android:text="@string/input_party_name"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
+
+    <EditText
+        android:id="@+id/etPartyName"
+        android:layout_width="300sp"
+        android:layout_height="48sp"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/tvPartyName"
+        android:autofillHints=""
+        android:backgroundTint="@color/black"
+        android:ems="10"
+        android:padding="12dp"
+        android:hint="@string/name"
+        android:inputType="textPersonName" />
+
+    <CheckBox
+        android:id="@+id/cbGroupType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPartyName"
+        android:layout_alignStart="@+id/etPartyName"
+        android:layout_marginTop="8dp"
+        android:buttonTint="@color/primaryGray"
+        android:text="@string/private_party"
+        android:textColor="#FFFFFF" />
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imgGroupPicture"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/ic_party_set_picture"
+        android:clickable="true"
+        android:visibility="invisible"
+        app:civ_border_width="3dp"
+        tools:ignore="MissingClass" />
+
+    <TextView
+        android:id="@+id/tvGroupPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/gmp_ref_measurement_spacing_20"
+        android:layout_marginTop="250dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="@string/group_s_picture"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:visibility="invisible" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/autocomplete_fragment"
+        android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/mapFragment"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/autocomplete_fragment"
+        android:visibility="gone"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="32dp">
+
+        <TextView
+            android:id="@+id/tvPartyDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pick_a_date"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tvSelectedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:padding="8dp"
+            android:text="@string/tap_to_select_date"
+            android:textColor="#039694"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tvHours"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pick_an_hour"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginBottom="4dp"
+            android:gravity="center"
+            android:visibility="invisible" />
+
+        <TimePicker
+            android:id="@+id/timePicker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:timePickerMode="clock"
+            android:visibility="invisible" />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnAddGroup"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:background="@color/transparent"
+        android:text="@string/create_party"
+        android:textAllCaps="false"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnNext1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="320dp"
+        android:background="@color/transparent"
+        android:text="@string/next"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/btnNext2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="320dp"
+        android:background="@color/transparent"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnBack1"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparent"
+        android:text="@string/back"
+        android:textAllCaps="false"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnBack2"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/transparent"
+        android:text="@string/back"
+        android:textAllCaps="false"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:background="#1000e9ba"
+        android:text="@string/done"
+        android:textAllCaps="false"
+        android:visibility="invisible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_margin="48dp"
+        android:src="@android:drawable/ic_dialog_email"
+        app:fabSize="normal"
+        android:contentDescription="@string/Chat"
+        tools:ignore="RelativeOverlap" />
+</RelativeLayout>

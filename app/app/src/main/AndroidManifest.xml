@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Network permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <!-- Location permissions -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- Notification permissions -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
+    <!-- FEATURES - Declare hardware requirements -->
+    <uses-feature
+        android:name="android.hardware.location"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.location.gps"
+        android:required="false" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="false"
+        android:theme="@style/AppTheme">
+
+        <!-- Activity settings -->
+        <activity
+            android:name=".ui.common.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.auth.LoginActivity"
+            android:theme="@style/Theme.Material3.Login" />
+
+        <activity
+            android:name=".ui.auth.RegisterActivity"
+            android:theme="@style/Theme.Material3.Register" />
+
+        <activity android:name=".ui.common.MainActivity" />
+        <activity android:name=".ui.group.FriendsAddActivity" />
+        <activity android:name=".ui.group.CreateGroupActivity" />
+        <activity android:name=".ui.group.AdminOptionsActivity" />
+        <activity android:name=".ui.group.ChangeDateActivity" />
+        <activity android:name=".ui.group.ChatActivity" />
+        <activity android:name=".ui.group.MembersComingActivity" />
+        <activity android:name=".ui.group.FriendsRemoveActivity" />
+        <activity android:name=".ui.profile.EditProfileActivity" />
+        <activity android:name=".ui.group.UsersListActivity" />
+        <activity android:name=".ui.group.JoinGroupActivity" />
+        <activity android:name=".ui.group.AdminSettingsActivity" />
+        <activity android:name=".ui.group.GroupDetailsActivity" />
+        <activity android:name=".ui.auth.IntroActivity" />
+        <activity android:name=".ui.group.MembersInvitedActivity" />
+        <activity android:name=".ui.group.PublicGroupsActivity" />
+        <activity android:name=".ui.auth.ResetPasswordActivity" />
+        <activity android:name=".ui.chatbot.GptChatActivity" />
+
+        <!-- Google Maps API Key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_KEY}" />
+    </application>
+
+</manifest>

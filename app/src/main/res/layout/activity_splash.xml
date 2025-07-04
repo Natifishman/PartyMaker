@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.partymaker.ui.common.SplashActivity"
+    android:background="@drawable/bg_splash_gradient">
+
+    <!-- Container for the logo and text -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <!-- Logo with shadow and animation -->
+        <ImageView
+            android:id="@+id/imgLogo"
+            android:layout_width="280dp"
+            android:layout_height="200dp"
+            android:layout_marginBottom="24dp"
+            android:contentDescription="@string/logo"
+            android:elevation="8dp"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_cake_black" />
+
+        <!-- App name text -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/partymaker"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:letterSpacing="0.1"
+            android:elevation="4dp"
+            android:shadowColor="#40000000"
+            android:shadowDx="2"
+            android:shadowDy="2"
+            android:shadowRadius="4" />
+
+        <!-- Subtitle -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:elevation="4dp"
+            android:letterSpacing="0.05"
+            android:text="@string/make_every_party_unforgettable"
+            android:textColor="#FAFAFA"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <!-- Animated dots for loading indication -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="80dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <View
+            android:id="@+id/dot1"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_loading_dot"
+            android:alpha="0.5" />
+
+        <View
+            android:id="@+id/dot2"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_loading_dot"
+            android:alpha="0.7" />
+
+        <View
+            android:id="@+id/dot3"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:layout_margin="4dp"
+            android:background="@drawable/shape_loading_dot"
+            android:alpha="1.0" />
+
+    </LinearLayout>
+
+    <!-- Version info at bottom -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:alpha="0.8"
+        android:text="@string/version_1_0"
+        android:textColor="#E8EAF6"
+        android:textSize="12sp"
+        tools:ignore="TextContrastCheck" />
+
+</RelativeLayout>

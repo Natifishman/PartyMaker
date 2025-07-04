@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Fade in animation -->
+    <alpha
+        android:duration="1500"
+        android:fromAlpha="0.0"
+        android:toAlpha="1.0"
+        android:interpolator="@android:anim/decelerate_interpolator" />
+
+    <!-- Scale animation for elegant entrance -->
+    <scale
+        android:duration="1500"
+        android:fromXScale="0.8"
+        android:fromYScale="0.8"
+        android:toXScale="1.0"
+        android:toYScale="1.0"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:interpolator="@android:anim/decelerate_interpolator" />
+
+    <!-- Subtle translate animation -->
+    <translate
+        android:duration="1500"
+        android:fromYDelta="50dp"
+        android:toYDelta="0dp"
+        android:interpolator="@android:anim/decelerate_interpolator" />
+
+</set>

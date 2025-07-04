@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_party_screen"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.example.partymaker.ui.group.FriendsAddActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <ImageButton
+            android:id="@+id/btnBack3"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/transparent"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_menu_back" />
+
+        <ImageView
+            android:id="@+id/imgAddFriend"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="@string/todo"
+            app:srcCompat="@drawable/ic_cake_black" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tvInstructions1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/type_in_your_friend_s_email_above_and_press_add_friend_to_add_him_to_the_current_group"
+        android:textAlignment="center"
+        android:textColor="#0081d1"
+        android:visibility="invisible" />
+
+    <EditText
+        android:id="@+id/etFriendEmail"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/gmp_ref_measurement_spacing_20"
+        android:autofillHints=""
+        android:background="@drawable/et_background"
+        android:drawableStart="@drawable/ic_email"
+        android:drawablePadding="10dp"
+        android:hint="@string/input_your_friend_s_email"
+        android:inputType="textEmailAddress"
+        android:minHeight="48dp"
+        android:textAlignment="center"
+        android:textColor="#0081d1"
+        android:textColorHint="#0081d1" />
+
+    <TextView
+        android:id="@+id/tvAddMore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/is_he_coming_to_the_party"
+        android:textColor="#0081d1"
+        android:textSize="25sp"
+        android:visibility="invisible" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/btnYes"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:background="#640081d1"
+            android:text="@string/yes"
+            android:textAllCaps="false"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btnNo"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="200dp"
+            android:background="#64af0707"
+            android:text="@string/i_dont_know"
+            android:textAllCaps="false"
+            android:visibility="invisible" />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnAddFriend"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            android:background="#10d15000"
+            android:shadowColor="@color/primaryGray"
+            android:shadowDx="-0"
+            android:shadowDy="-0"
+            android:shadowRadius="25"
+            android:text="@string/add_friend"
+            android:textAllCaps="false"
+            android:textColor="#d15000"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnFriendsList"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="10dp"
+            android:background="#106e6e6e"
+            android:shadowColor="@color/primaryGray"
+            android:shadowDx="-0"
+            android:shadowDy="-0"
+            android:shadowRadius="25"
+            android:text="@string/friends_list"
+            android:textAllCaps="false"
+            android:textColor="#0081d1"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <Button
+            android:id="@+id/btnHelp1"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="210dp"
+            android:background="#0000ffff"
+            android:text="@string/press_here"
+            android:textAllCaps="false"
+            android:textColor="#0081d1" />
+
+        <TextView
+            android:id="@+id/tvHelp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="130dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/need_help"
+            android:textColor="#0081d1" />
+
+        <Button
+            android:id="@+id/btnHide1"
+            android:layout_width="75dp"
+            android:layout_height="30dp"
+            android:layout_marginLeft="200dp"
+            android:background="#0000ffff"
+            android:text="@string/hide_it"
+            android:textAllCaps="false"
+            android:textColor="#0081d1"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/tvHide1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="5dp"
+            android:text="@string/got_help"
+            android:textColor="#0081d1"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</LinearLayout>

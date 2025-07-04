@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_party_screen"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:fitsSystemWindows="true"
+    tools:context="com.example.partymaker.ui.group.JoinGroupActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3.2">
+
+        <TextView
+            android:id="@+id/tvGroupName1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/group_name"
+            android:textColor="@android:color/white"
+            android:textSize="34sp" />
+
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="@string/created_by"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tvCreatedBy1"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:text="@string/username_date"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tvYourEntry1"
+            android:layout_width="70dp"
+            android:layout_below="@id/tvGroupName1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_centerHorizontal="true"
+            android:text="@string/entry_price"
+            android:textColor="@android:color/white" />
+
+        <TextView
+            android:id="@+id/tvEntryPrice1"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvGroupName1"
+            android:layout_toRightOf="@id/tvYourEntry1"
+            android:text="@string/free"
+            android:textColor="@android:color/white" />
+
+    </RelativeLayout>
+
+    <GridLayout
+        android:id="@+id/joinGrid"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:alignmentMode="alignMargins"
+        android:columnCount="2"
+        android:columnOrderPreserved="false"
+        android:padding="14dp"
+        android:rowCount="4">
+        <!-- 1,1 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imgLocation1"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_party_location" />
+
+                <TextView
+                    android:id="@+id/tvLocation1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="45dp"
+                    android:text="@string/location"
+                    android:textAlignment="center"
+                    android:textColor="#1986ed"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvGroupLocation1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/hello"
+                android:textColor="#1986ed"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+        </androidx.cardview.widget.CardView>
+        <!-- 1,2 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp">
+
+                <ImageView
+                    android:id="@+id/imgGroupDate"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_alignEnd="@+id/tvGroupDateDays"
+                    android:layout_alignParentTop="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginRight="7dp"
+                    android:layout_marginTop="5dp"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_party_calendar" />
+
+                <TextView
+                    android:id="@+id/tvGroupDateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@+id/tvGroupDateDays"
+                    android:layout_below="@+id/imgGroupDate"
+                    android:layout_marginRight="7dp"
+                    android:text="@string/date"
+                    android:textAlignment="center"
+                    android:textColor="#1986ed"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvGroupDateDays"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:text="@string/_31"
+                    android:textAlignment="center"
+                    android:textColor="#1986ed"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
+
+                <TextView
+                    android:id="@+id/tvGroupAt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="30dp"
+                    android:text="@string/at"
+                    android:textAlignment="center"
+                    android:textColor="#1986ed"
+                    android:textSize="40sp"
+                    android:textStyle="bold"
+                    android:visibility="invisible" />
+
+                <RelativeLayout
+                    android:layout_width="100dp"
+                    android:layout_height="25dp"
+                    android:layout_marginTop="50dp">
+
+                    <TextView
+                        android:id="@+id/tvGroupDateMonths"
+                        android:layout_width="wrap_content"
+                        android:layout_height="25dp"
+                        android:layout_marginLeft="10dp"
+                        android:text="@string/feb"
+                        android:textColor="#1986ed"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/tvGroupDateYears"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="50dp"
+                        android:text="@string/_2018"
+                        android:textColor="#1986ed"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+
+                    <TextView
+                        android:id="@+id/tvGroupDateHours"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:text="@string/_00_00"
+                        android:textColor="#1986ed"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:visibility="invisible" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/imgSeeHours1"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="140dp"
+                android:layout_marginTop="182dp"
+                android:contentDescription="TODO"
+                android:src="@drawable/ic_party_arrow"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/tvSeeHours1"
+                android:layout_width="80dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="67dp"
+                android:layout_marginTop="180dp"
+                android:text="@string/press_to_see_time"
+                android:textColor="#1986ed"
+                android:textSize="10sp"
+                android:visibility="invisible"
+                tools:ignore="SmallSp" />
+
+            <TextView
+                android:id="@+id/tvSeeDate1"
+                android:layout_width="80dp"
+                android:layout_height="15dp"
+                android:layout_marginLeft="67dp"
+                android:layout_marginTop="180dp"
+                android:text="@string/press_to_see_date"
+                android:textColor="#1986ed"
+                android:textSize="10sp"
+                android:visibility="invisible"
+                tools:ignore="SmallSp" />
+        </androidx.cardview.widget.CardView>
+        <!-- 2,1 -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_party_join" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/join_group"
+                    android:textAlignment="center"
+                    android:textColor="#1986ed"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- 2,2 -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/Card4"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_columnWeight="1"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_rowWeight="1"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/ic_party_leave" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/back"
+                    android:textAlignment="center"
+                    android:textColor="#1986ed"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </GridLayout>
+
+</LinearLayout>

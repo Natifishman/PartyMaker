@@ -1,0 +1,4 @@
+/build
+
+# Local configuration file
+src/main/assets/local.properties
