@@ -31,12 +31,18 @@ jobs:
       - name: Create local.properties
         run: echo "sdk.dir=$ANDROID_HOME" > local.properties
 
-        # Step 5: Create secrets.properties
+      # Step 5: Create secrets.properties
       - name: Create secrets.properties
         run: |
           echo "MAPS_KEY=${{ secrets.MAPS_KEY }}" > secrets.properties
 
-      # Step 6: Cache Gradle – to speed up runs
+      # Step 6: Decode google-services.json
+      - name: Decode google-services.json
+        run: |
+          echo "${{ secrets.GOOGLE_SERVICES_JSON }}" | base64 -d > app/google-services.json
+          echo "Google Services JSON file created"
+
+      # Step 7: Cache Gradle – to speed up runs
       - name: Cache Gradle
         uses: actions/cache@v3
         with:
@@ -45,10 +51,10 @@ jobs:
             ~/.gradle/wrapper
           key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 
-      # Step 7: Grant permissions to the gradlew file
+      # Step 8: Grant permissions to the gradlew file
       - name: Grant permission to execute gradlew
         run: chmod +x ./gradlew
 
-      # Step 8: Running the actual build
+      # Step 9: Running the actual build
       - name: Build with Gradle
         run: ./gradlew assembleDebug
