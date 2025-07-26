@@ -18,6 +18,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProvider;
 import com.example.partymaker.R;
 import com.example.partymaker.data.api.FirebaseServerClient;
 import com.example.partymaker.data.firebase.DBRef;
@@ -26,6 +27,7 @@ import com.example.partymaker.utilities.AuthHelper;
 import com.example.partymaker.utilities.Common;
 import com.example.partymaker.utilities.ExtrasMetadata;
 import com.example.partymaker.utilities.MapUtilities;
+import com.example.partymaker.viewmodel.AdminOptionsViewModel;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -63,6 +65,7 @@ public class AdminOptionsActivity extends AppCompatActivity implements OnMapRead
   private Button saveLocationButton;
   private FrameLayout mapContainer;
   private boolean isAdminVerified = false; // Track admin verification status
+  private AdminOptionsViewModel viewModel;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -117,9 +120,7 @@ public class AdminOptionsActivity extends AppCompatActivity implements OnMapRead
       finish();
       return;
     }
-
-    // Get Values from GroupScreen By intent + connection between intent and current
-    // activity objects
+    // Get Values from GroupScreen By intent + connection between intent and current activity objects
     ExtrasMetadata extras = Common.getExtrasMetadataFromIntent(getIntent());
     if (extras == null) {
       Toast.makeText(this, "Missing intent data", Toast.LENGTH_SHORT).show();
@@ -143,50 +144,39 @@ public class AdminOptionsActivity extends AppCompatActivity implements OnMapRead
     ComingKeys = extras.getComingKeys();
     MessageKeys = extras.getMessageKeys();
 
-    // Verify admin status before allowing access
-    verifyAdminStatus();
+    // ViewModel setup
+    viewModel = new ViewModelProvider(this).get(AdminOptionsViewModel.class);
+    viewModel.setExtras(extras, UserKey);
+    observeViewModel();
+    viewModel.verifyAdminStatus();
   }
 
-  private void verifyAdminStatus() {
-    // Show loading message
-    Toast.makeText(this, "Verifying admin permissions...", Toast.LENGTH_SHORT).show();
-
-    FirebaseServerClient serverClient = FirebaseServerClient.getInstance();
-    serverClient.getGroup(
-        GroupKey,
-        new FirebaseServerClient.DataCallback<Group>() {
-          @Override
-          public void onSuccess(Group group) {
-            if (group != null
-                && group.getAdminKey() != null
-                && group.getAdminKey().equals(UserKey)) {
-              // User is verified as admin
-              isAdminVerified = true;
-              // Update local admin key to match server data
-              AdminKey = group.getAdminKey();
-              // Initialize UI after verification
-              initializeUI();
-            } else {
-              // User is not admin - deny access
-              Toast.makeText(
-                      AdminOptionsActivity.this,
-                      "Access denied. Only group admin can access this page.",
-                      Toast.LENGTH_LONG)
-                  .show();
-              finish();
-            }
-          }
-
-          @Override
-          public void onError(String errorMessage) {
-            Toast.makeText(
-                    AdminOptionsActivity.this,
-                    "Failed to verify admin status: " + errorMessage,
-                    Toast.LENGTH_LONG)
-                .show();
-            finish();
-          }
-        });
+  private void observeViewModel() {
+    viewModel.getIsAdminVerified().observe(this, isVerified -> {
+      if (Boolean.TRUE.equals(isVerified)) {
+        initializeUI();
+      }
+    });
+    viewModel.getErrorMessage().observe(this, msg -> {
+      if (msg != null && !msg.isEmpty()) {
+        Toast.makeText(this, msg, Toast.LENGTH_LONG).show();
+      }
+    });
+    viewModel.getPriceChanged().observe(this, changed -> {
+      if (Boolean.TRUE.equals(changed)) {
+        Toast.makeText(this, "Price Changed", Toast.LENGTH_SHORT).show();
+      }
+    });
+    viewModel.getLocationChanged().observe(this, changed -> {
+      if (Boolean.TRUE.equals(changed)) {
+        Toast.makeText(this, "Location Changed", Toast.LENGTH_SHORT).show();
+      }
+    });
+    viewModel.getFinishActivity().observe(this, finish -> {
+      if (Boolean.TRUE.equals(finish)) {
+        finish();
+      }
+    });
   }
 
   private void initializeUI() {
@@ -209,7 +199,7 @@ public class AdminOptionsActivity extends AppCompatActivity implements OnMapRead
     wireMapComponents();
 
     // settings + things to see when activity starts
-    tvAdminEmail.setText(AdminKey.replace(' ', '.'));
+    tvAdminEmail.setText(viewModel.getExtras().getAdminKey().replace(' ', '.'));
 
     // start AdminOptions
     wireAdminOptions(myGrid);
@@ -250,90 +240,36 @@ public class AdminOptionsActivity extends AppCompatActivity implements OnMapRead
   }
 
   private void eventHandler() {
-    // Check admin verification before allowing any operations
-    if (!isAdminVerified) {
-      Toast.makeText(this, "Admin verification required", Toast.LENGTH_SHORT).show();
-      return;
-    }
-
     CardPrice.setOnClickListener(
         v -> {
           final EditText edittext = new EditText(AdminOptionsActivity.this);
           edittext.setInputType(InputType.TYPE_CLASS_NUMBER);
-          edittext.setText(GroupPrice);
+          edittext.setText(viewModel.getGroupPrice().getValue());
           AlertDialog.Builder alert = new AlertDialog.Builder(AdminOptionsActivity.this);
           alert.setMessage("Input new price below");
           alert.setTitle("Change party's entry price");
-
           alert.setView(edittext);
-
           alert.setPositiveButton(
               "Change price",
               (dialog, whichButton) -> {
-                // Double-check admin status before making changes
-                if (!isAdminVerified || !AdminKey.equals(UserKey)) {
-                  Toast.makeText(
-                          AdminOptionsActivity.this,
-                          "Access denied. Admin verification failed.",
-                          Toast.LENGTH_LONG)
-                      .show();
-                  return;
-                }
-                // if pressed changed name
-                GroupPrice = edittext.getText().toString();
-                DBRef.refGroups.child(GroupKey).child("groupPrice").setValue(GroupPrice);
-                Toast.makeText(AdminOptionsActivity.this, "Price Changed", Toast.LENGTH_SHORT)
-                    .show();
+                viewModel.changeGroupPrice(edittext.getText().toString());
               });
-
-          alert.setNegativeButton(
-              "Back",
-              (dialog, whichButton) -> {
-                // what ever you want to do with Back.
-              });
-
+          alert.setNegativeButton("Back", (dialog, whichButton) -> {});
           alert.show();
         });
-
     CardLocation.setOnClickListener(
         v -> {
-          // Double-check admin status before allowing location changes
-          if (!isAdminVerified || !AdminKey.equals(UserKey)) {
-            Toast.makeText(
-                    AdminOptionsActivity.this,
-                    "Access denied. Admin verification failed.",
-                    Toast.LENGTH_LONG)
-                .show();
-            return;
-          }
-
           mainContent.setVisibility(View.INVISIBLE);
           MapUtilities.centerMapOnChosenPlace(
               map,
               Place.builder()
-                  .setLatLng(MapUtilities.decodeStringLocationToCoordinates(GroupLocation))
+                  .setLatLng(MapUtilities.decodeStringLocationToCoordinates(viewModel.getGroupLocation().getValue()))
                   .build());
           mapContainer.setVisibility(View.VISIBLE);
-
           saveLocationButton.setOnClickListener(
               v1 -> {
-                // Triple-check admin status before saving location
-                if (!isAdminVerified || !AdminKey.equals(UserKey)) {
-                  Toast.makeText(
-                          AdminOptionsActivity.this,
-                          "Access denied. Admin verification failed.",
-                          Toast.LENGTH_LONG)
-                      .show();
-                  return;
-                }
-
                 if (chosenLatLng != null) {
-                  String locationValue =
-                      MapUtilities.encodeCoordinatesToStringLocation(chosenLatLng);
-                  DBRef.refGroups.child(GroupKey).child("groupLocation").setValue(locationValue);
-                  GroupLocation = locationValue;
-                  Toast.makeText(AdminOptionsActivity.this, "Location Changed", Toast.LENGTH_SHORT)
-                      .show();
+                  viewModel.changeGroupLocation(chosenLatLng);
                 } else {
                   Toast.makeText(
                           AdminOptionsActivity.this,
