@@ -20,9 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.partymaker.R;
-import com.example.partymaker.data.api.FirebaseServerClient;
-import com.example.partymaker.data.firebase.DBRef;
-import com.example.partymaker.data.model.Group;
 import com.example.partymaker.utilities.AuthHelper;
 import com.example.partymaker.utilities.Common;
 import com.example.partymaker.utilities.ExtrasMetadata;
@@ -45,18 +42,17 @@ import java.util.Objects;
 public class AdminOptionsActivity extends AppCompatActivity implements OnMapReadyCallback {
   private static final String TAG = "AdminOptionsActivity";
   private LinearLayout mainContent;
-  private String AdminKey,
-      GroupKey,
-      GroupName,
-      GroupDay,
-      GroupMonth,
-      GroupYear,
-      GroupHour,
-      GroupLocation,
-      CreatedAt,
-      GroupPrice,
-      UserKey; // Add UserKey for admin verification
-  private int GroupType;
+  private String AdminKey;
+    private String GroupKey;
+    private String GroupName;
+    private String GroupDay;
+    private String GroupMonth;
+    private String GroupYear;
+    private String GroupHour;
+    private String GroupLocation;
+    private String CreatedAt;
+    private String GroupPrice;
+    private int GroupType;
   private HashMap<String, Object> FriendKeys, ComingKeys, MessageKeys;
   private boolean CanAdd;
   private CardView CardPrice, CardLocation;
@@ -64,7 +60,6 @@ public class AdminOptionsActivity extends AppCompatActivity implements OnMapRead
   private LatLng chosenLatLng;
   private Button saveLocationButton;
   private FrameLayout mapContainer;
-  private boolean isAdminVerified = false; // Track admin verification status
   private AdminOptionsViewModel viewModel;
 
   @Override
@@ -113,8 +108,10 @@ public class AdminOptionsActivity extends AppCompatActivity implements OnMapRead
     Objects.requireNonNull(actionBar).hide();
 
     // Get current user key for admin verification
-    try {
-      UserKey = AuthHelper.getCurrentUserKey(this);
+      // Add UserKey for admin verification
+      String userKey;
+      try {
+      userKey = AuthHelper.getCurrentUserKey(this);
     } catch (Exception e) {
       Toast.makeText(this, "Authentication error. Please login again.", Toast.LENGTH_LONG).show();
       finish();
@@ -146,7 +143,7 @@ public class AdminOptionsActivity extends AppCompatActivity implements OnMapRead
 
     // ViewModel setup
     viewModel = new ViewModelProvider(this).get(AdminOptionsViewModel.class);
-    viewModel.setExtras(extras, UserKey);
+    viewModel.setExtras(extras, userKey);
     observeViewModel();
     viewModel.verifyAdminStatus();
   }
