@@ -1,10 +1,7 @@
 package com.example.partymaker.ui.features.groups.chat;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.icu.util.Calendar;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
@@ -12,10 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import androidx.annotation.NonNull;
 import android.widget.Toast;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import com.example.partymaker.R;
 import com.example.partymaker.data.api.FirebaseServerClient;
 import com.example.partymaker.data.api.FirebaseServerClient.OperationCallback;
@@ -23,6 +18,7 @@ import com.example.partymaker.data.api.OpenAiApi;
 import com.example.partymaker.data.model.ChatMessage;
 import com.example.partymaker.data.model.Group;
 import com.example.partymaker.ui.adapters.ChatAdapter;
+import com.example.partymaker.ui.base.BaseActivity;
 import com.example.partymaker.utils.auth.AuthenticationManager;
 import com.example.partymaker.utils.core.IntentExtrasManager;
 import com.example.partymaker.utils.core.ExtrasMetadata;
@@ -37,9 +33,8 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-public class ChatActivity extends AppCompatActivity {
+public class ChatActivity extends BaseActivity<GroupChatViewModel> {
 
-  private static final String TAG = "ChatActivity";
   private static final int MAX_RETRY_ATTEMPTS = 3;
   private final Handler retryHandler = new Handler(Looper.getMainLooper());
   private ListView lv4;
@@ -51,99 +46,109 @@ public class ChatActivity extends AppCompatActivity {
   private FirebaseServerClient serverClient;
   private ChatAdapter adapter;
   private String UserKey;
-  private GroupChatViewModel viewModel;
   private GroupKeyManager groupKeyManager;
   private GroupMessageEncryption groupEncryption;
 
+  // BaseActivity implementation methods
+  
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    Log.d(TAG, "ChatActivity onCreate called");
-    setContentView(R.layout.activity_party_chat);
+  protected int getLayoutId() {
+    return R.layout.activity_party_chat;
+  }
 
-    // Show a toast message to confirm onCreate is called
-    Toast.makeText(this, "ChatActivity onCreate called", Toast.LENGTH_SHORT).show();
+  @Override
+  protected Class<GroupChatViewModel> getViewModelClass() {
+    return GroupChatViewModel.class;
+  }
 
+  @Override
+  protected String getActivityTitle() {
+    return "Chat";
+  }
+
+  @Override
+  protected void initViews() {
     // Initialize server client
     serverClient = FirebaseServerClient.getInstance();
+    
+    // Get data from intent and validate
+    extractIntentData();
+    
+    // Initialize UI components
+    lv4 = findViewById(R.id.lv4);
+    etMessage = findViewById(R.id.etMessage);
+    btnSend = findViewById(R.id.btnSend);
+    btnGpt = findViewById(R.id.btnGpt);
+  }
 
-    // Initialize ViewModel
-    viewModel = new ViewModelProvider(this).get(GroupChatViewModel.class);
+  @Override
+  protected void setupObservers() {
     setupViewModelObservers();
+  }
 
-    // Actionbar settings
-    ActionBar actionBar = getSupportActionBar();
-    assert actionBar != null;
-    actionBar.setTitle("Chat");
-    actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0081d1")));
+  @Override
+  protected void setupClickListeners() {
+    setupEventHandlers();
+    setupGptButton();
+  }
 
-    // Get data from intent directly
-    Log.d(TAG, "Getting extras from intent");
+  @Override
+  protected void onActivityStart() {
+    super.onActivityStart();
+    
+    // Set the group key in ViewModel
+    if (viewModel != null && GroupKey != null) {
+      viewModel.setGroupKey(GroupKey);
+    }
+    
+    // Initialize encryption for this group
+    initializeGroupEncryption();
+    
+    // Load data
+    ShowData();
+  }
+
+  /**
+   * Extract and validate data from intent
+   */
+  private void extractIntentData() {
     Intent intent = getIntent();
 
     // Get GroupKey directly from intent first
     GroupKey = intent.getStringExtra("GroupKey");
-    Log.d(TAG, "GroupKey from direct intent extra: " + GroupKey);
 
     // Try to get data from ExtrasMetadata only if direct intent extra is null
     if (GroupKey == null || GroupKey.isEmpty()) {
       ExtrasMetadata extras = IntentExtrasManager.getExtrasMetadataFromIntent(intent);
       if (extras != null) {
-        Log.d(TAG, "Found ExtrasMetadata in intent");
         MessageKeys = extras.getMessageKeys();
         GroupKey = extras.getGroupKey();
       } else {
-        // Initialize empty MessageKeys
         MessageKeys = new HashMap<>();
       }
     } else {
-      // Initialize empty MessageKeys
       MessageKeys = new HashMap<>();
     }
 
     // Check if we have the required data
     if (GroupKey == null || GroupKey.isEmpty()) {
-      Log.e(TAG, "Missing GroupKey in intent");
-      Toast.makeText(this, "Missing group data", Toast.LENGTH_SHORT).show();
+      showError("Missing group data");
       finish();
       return;
     }
 
-    Log.d(TAG, "GroupKey retrieved: " + GroupKey);
-
-    // Get UserKey from AuthHelper instead of Firebase Auth
+    // Get UserKey from AuthHelper
     try {
       UserKey = AuthenticationManager.getCurrentUserKey(this);
-      Log.d(TAG, "UserKey initialized from AuthHelper: " + UserKey);
     } catch (Exception e) {
-      Log.e(TAG, "Failed to get current user from AuthHelper", e);
       UserKey = intent.getStringExtra("UserKey"); // Fallback to intent if auth fails
-      Log.d(TAG, "Using fallback UserKey from intent: " + UserKey);
 
       if (UserKey == null) {
-        Log.e(TAG, "UserKey is null after fallback");
-        Toast.makeText(this, "Error: Missing user information", Toast.LENGTH_SHORT).show();
+        showError("Missing user information");
         finish();
         return;
       }
     }
-
-    // connection
-    Log.d(TAG, "Initializing UI components");
-    lv4 = findViewById(R.id.lv4);
-    etMessage = findViewById(R.id.etMessage);
-    btnSend = findViewById(R.id.btnSend);
-    btnGpt = findViewById(R.id.btnGpt);
-
-    ShowData();
-    eventHandler();
-    setupGptButton();
-
-    // Set the group key in ViewModel
-    viewModel.setGroupKey(GroupKey);
-    
-    // Initialize encryption for this group
-    initializeGroupEncryption();
   }
 
   /** Initialize group encryption for secure messaging */
@@ -221,7 +226,7 @@ public class ChatActivity extends AppCompatActivity {
             });
   }
 
-  private void eventHandler() {
+  private void setupEventHandlers() {
     Log.d(TAG, "Setting up event handlers");
     lv4.setOnItemClickListener((parent, view, position, id) -> {});
     lv4.setOnItemLongClickListener((parent, view, position, id) -> false);

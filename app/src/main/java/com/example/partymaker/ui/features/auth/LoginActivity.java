@@ -13,8 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+import com.example.partymaker.ui.base.BaseActivity;
 import com.example.partymaker.R;
 import com.example.partymaker.data.api.NetworkManager;
 import com.example.partymaker.data.firebase.DBRef;
@@ -42,9 +41,7 @@ import java.util.Objects;
  * Activity for user login, including email/password and Google sign-in. Handles authentication,
  * navigation, and UI state.
  */
-public class LoginActivity extends AppCompatActivity {
-  /** Tag for logging. */
-  private static final String TAG = "LoginActivity";
+public class LoginActivity extends BaseActivity<AuthViewModel> {
 
   /** Request code for Google sign-in. */
   private static final int RC_SIGN_IN = 9001;
@@ -79,8 +76,6 @@ public class LoginActivity extends AppCompatActivity {
   /** Firebase authentication instance. */
   private FirebaseAuth mAuth;
 
-  /** Authentication ViewModel */
-  private AuthViewModel authViewModel;
 
   /** Loading state manager */
   private LoadingStateManager loadingStateManager;
@@ -88,23 +83,38 @@ public class LoginActivity extends AppCompatActivity {
   /** Root view for UI feedback */
   private View rootView;
 
+  // BaseActivity implementation methods
+  
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_auth_login);
+  protected int getLayoutId() {
+    return R.layout.activity_auth_login;
+  }
 
+  @Override
+  protected Class<AuthViewModel> getViewModelClass() {
+    return AuthViewModel.class;
+  }
+
+  @Override
+  protected String getActivityTitle() {
+    return "Login";
+  }
+
+  @Override
+  protected boolean shouldShowBackButton() {
+    return false; // Login screen shouldn't have back button
+  }
+
+  @Override
+  protected void initViews() {
     // Force set server URL to Render
     forceSetServerUrl();
 
     // Initialize Firebase Auth
     mAuth = FirebaseAuth.getInstance();
 
-    // Initialize ViewModel
-    authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
-
     // Initialize UI components
     initializeUiComponents();
-    setupViewModelObservers();
 
     // Clear any previous authentication state to prevent auto-login
     clearPreviousAuthState();
@@ -114,6 +124,22 @@ public class LoginActivity extends AppCompatActivity {
 
     // Check server connectivity
     checkServerConnectivity();
+  }
+
+  @Override
+  protected void setupObservers() {
+    setupViewModelObservers();
+  }
+
+  @Override
+  protected void setupClickListeners() {
+    // This will be called from onActivityStart where eventHandler() is called
+    // No need to duplicate the setup here
+  }
+
+  @Override
+  protected void onActivityStart() {
+    super.onActivityStart();
 
     // Configure Google Sign In
     GoogleSignInOptions gso =
@@ -172,7 +198,7 @@ public class LoginActivity extends AppCompatActivity {
 
   /** Sets up observers for AuthViewModel LiveData */
   private void setupViewModelObservers() {
-    authViewModel
+    viewModel
         .getIsLoading()
         .observe(
             this,
@@ -187,7 +213,7 @@ public class LoginActivity extends AppCompatActivity {
               }
             });
 
-    authViewModel
+    viewModel
         .getErrorMessage()
         .observe(
             this,
@@ -198,14 +224,14 @@ public class LoginActivity extends AppCompatActivity {
                     errorMessage,
                     () -> {
                       // Retry logic - clear error and enable retry
-                      authViewModel.clearError();
+                      viewModel.clearError();
                     });
                 loadingStateManager.showError(errorMessage);
                 btnResetPass.setVisibility(View.VISIBLE);
               }
             });
 
-    authViewModel
+    viewModel
         .getSuccessMessage()
         .observe(
             this,
@@ -215,7 +241,7 @@ public class LoginActivity extends AppCompatActivity {
               }
             });
 
-    authViewModel
+    viewModel
         .getIsAuthenticated()
         .observe(
             this,
@@ -353,7 +379,7 @@ public class LoginActivity extends AppCompatActivity {
             String email = Objects.requireNonNull(etEmail.getText()).toString();
             String password = Objects.requireNonNull(etPassword.getText()).toString();
 
-            authViewModel.loginWithEmail(email, password);
+            viewModel.loginWithEmail(email, password);
 
             // Set user session using AuthHelper when login succeeds
             if (!email.isEmpty()) {
@@ -365,7 +391,7 @@ public class LoginActivity extends AppCompatActivity {
     // Google Sign In button click listener - use ViewModel's GoogleSignInClient
     btnGoogleSignIn.setOnClickListener(
         v -> {
-          Intent signInIntent = authViewModel.getGoogleSignInClient().getSignInIntent();
+          Intent signInIntent = viewModel.getGoogleSignInClient().getSignInIntent();
           startActivityForResult(signInIntent, RC_SIGN_IN);
         });
 
@@ -398,7 +424,7 @@ public class LoginActivity extends AppCompatActivity {
 
     if (requestCode == RC_SIGN_IN) {
       Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-      authViewModel.signInWithGoogle(task);
+      viewModel.signInWithGoogle(task);
     }
   }
 
@@ -408,8 +434,8 @@ public class LoginActivity extends AppCompatActivity {
       Log.d(TAG, "Clearing previous authentication state to prevent auto-login");
 
       // Reset the ViewModel's authentication state
-      if (authViewModel != null) {
-        authViewModel.clearAuthenticationState();
+      if (viewModel != null) {
+        viewModel.clearAuthenticationState();
       }
 
       Log.d(TAG, "Authentication state cleared successfully");

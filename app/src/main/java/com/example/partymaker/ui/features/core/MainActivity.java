@@ -14,9 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.partymaker.ui.base.BaseActivity;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.partymaker.R;
@@ -38,14 +37,7 @@ import com.example.partymaker.viewmodel.core.MainActivityViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.HashMap;
 
-public class MainActivity extends AppCompatActivity {
-
-  // Constants
-  private static final String TAG = "MainActivity";
-  private static final String ACTION_BAR_START_COLOR = "#0E81D1";
-  private static final String ACTION_BAR_END_COLOR = "#0E81D1";
-  private static final String ACTION_BAR_TITLE_COLOR = "#FFFFFF";
-  private static final float ACTION_BAR_ELEVATION = 15f;
+public class MainActivity extends BaseActivity<MainActivityViewModel> {
 
   // UI Components
   private RecyclerView lv1;
@@ -54,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
   private View rootView;
 
   // Data Components
-  private MainActivityViewModel viewModel;
   private String UserKey;
   private GroupAdapter groupAdapter;
 
@@ -67,43 +58,76 @@ public class MainActivity extends AppCompatActivity {
   // Track when we last refreshed to avoid excessive server calls
   private long lastRefreshTime = 0;
   private static final long REFRESH_COOLDOWN_MS = 30000; // 30 seconds cooldown
+  
+  // ActionBar styling constants
+  private static final String ACTION_BAR_START_COLOR = "#0081d1";
+  private static final String ACTION_BAR_END_COLOR = "#0066cc";
+  private static final String ACTION_BAR_TITLE_COLOR = "#FFFFFF";
+  private static final float ACTION_BAR_ELEVATION = 15f;
 
-  @SuppressLint("ClickableViewAccessibility")
+  // BaseActivity implementation methods
+  
   @Override
-  protected void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-    try {
-      setContentView(R.layout.activity_main);
+  protected int getLayoutId() {
+    return R.layout.activity_main;
+  }
 
+  @Override
+  protected Class<MainActivityViewModel> getViewModelClass() {
+    return MainActivityViewModel.class;
+  }
+
+  @Override
+  protected String getActivityTitle() {
+    return "PartyMaker";
+  }
+
+  @Override
+  protected boolean shouldShowBackButton() {
+    return false; // MainActivity shouldn't have back button
+  }
+
+  @Override
+  protected void initViews() {
+    try {
       // Force set server URL to Render
       forceSetServerUrl();
 
       if (!initializeUser()) {
+        finish();
         return; // Exit if user initialization failed
       }
 
-      // Initialize ViewModel
-      viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+      initializeMainViews();
+    } catch (Exception e) {
+      showError("An unexpected error occurred. Please restart the app.");
+      finish();
+    }
+  }
 
-      initializeViews();
-      setupActionBar();
-      setupEventHandlers();
-      setupFloatingChatButton();
-      setupBottomNavigation();
+  @Override
+  protected void setupObservers() {
+    observeViewModel();
+  }
 
-      // Observe group data from ViewModel
-      observeViewModel();
+  @Override
+  protected void setupClickListeners() {
+    setupEventHandlers();
+    setupFloatingChatButton();
+    setupBottomNavigation();
+  }
 
-      // Show loading indicator without toast
-      showLoading(true, false);
+  @Override
+  protected void onActivityStart() {
+    super.onActivityStart();
+    
+    // Show loading indicator without toast
+    showLoading(true, false);
 
-      // Load groups for current user
-      Log.d(TAG, "Starting to load groups for user: " + UserKey);
+    // Load groups for current user
+    if (UserKey != null && viewModel != null) {
       viewModel.loadUserGroups(UserKey, true);
       lastRefreshTime = System.currentTimeMillis();
-    } catch (Exception e) {
-      Log.e(TAG, "Fatal error in onCreate", e);
-      showError("An unexpected error occurred. Please restart the app.");
     }
   }
 
@@ -197,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
   }
 
   // Initializes all view components.
-  private void initializeViews() {
+  private void initializeMainViews() {
     rootView = findViewById(android.R.id.content);
     lv1 = findViewById(R.id.lv1);
     fabChat = findViewById(R.id.fabChat);
@@ -649,7 +673,7 @@ public class MainActivity extends AppCompatActivity {
    *
    * @param message The error message to display
    */
-  private void showError(String message) {
+  protected void showError(String message) {
     try {
       UiStateManager.showError(rootView, message);
       Log.e(TAG, "Error shown to user: " + message);
