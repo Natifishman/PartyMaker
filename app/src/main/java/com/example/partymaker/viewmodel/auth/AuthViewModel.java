@@ -195,7 +195,7 @@ public class AuthViewModel extends BaseViewModel {
                           () -> {
                             setLoading(false);
                             if (task.isSuccessful()) {
-                              handleSuccessfulLogin("Email login successful");
+                              handleSuccessfulLogin("");
                             } else {
                               handleAuthError("Email login failed", task.getException());
                             }
@@ -324,7 +324,7 @@ public class AuthViewModel extends BaseViewModel {
                   Log.d(TAG, "Existing user signed in with Google");
                   currentUser.setValue(firebaseUser);
                   isAuthenticated.setValue(true);
-                  setSuccess("Login successful");
+                  // Success message handled by LoginActivity
                 } else {
                   // New user, create profile
                   Log.d(TAG, "New user, creating profile");
@@ -475,8 +475,8 @@ public class AuthViewModel extends BaseViewModel {
     if (user != null) {
       currentUser.setValue(user);
       isAuthenticated.setValue(true);
-      setSuccess(message);
-      Log.d(TAG, "Login successful: " + message);
+      // Success message now handled by LoginActivity to avoid duplicates
+      Log.d(TAG, "Login successful: " + (message.isEmpty() ? "via ViewModel" : message));
     } else {
       setError("Authentication error: User not found");
       Log.e(TAG, "Login success but user is null");
