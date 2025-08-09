@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Mode Color Overrides -->
+    
+    <!-- Background Colors -->
+    <color name="colorBackground">@color/dark_background</color>
+    <color name="colorSurface">@color/dark_surface</color>
+    <color name="colorSurfaceVariant">@color/dark_surface_variant</color>
+    
+    <!-- Text Colors -->
+    <color name="textPrimary">@color/text_primary_dark</color>
+    <color name="textSecondary">@color/text_secondary_dark</color>
+    <color name="textDisabled">@color/text_disabled_dark</color>
+    <color name="textHint">@color/text_hint_dark</color>
+    
+    <!-- Override neutral colors for dark mode -->
+    <color name="neutral_900">@color/neutral_50</color>
+    <color name="neutral_700">@color/neutral_100</color>
+    <color name="neutral_500">@color/neutral_300</color>
+    <color name="neutral_300">@color/neutral_500</color>
+    <color name="neutral_100">@color/neutral_700</color>
+    <color name="neutral_50">@color/neutral_900</color>
+    
+    <!-- Card and surface colors -->
+    <color name="card_background">@color/dark_surface</color>
+    <color name="surface_light">@color/dark_surface</color>
+    <color name="surface_elevated_light">@color/dark_surface_variant</color>
+    
+    <!-- Adjust primary colors for better contrast in dark mode -->
+    <color name="primary_surface">#1A1A2E</color>
+    
+    <!-- Shimmer colors for dark mode -->
+    <color name="shimmer_base">#2A2A3E</color>
+    <color name="shimmer_highlight">#3A3A4E</color>
+    
+    <!-- Divider colors -->
+    <color name="divider_light">@color/divider_dark</color>
+    
+    <!-- Overlay colors -->
+    <color name="scrim_light">@color/scrim_dark</color>
+    <color name="overlay_light">@color/overlay_dark</color>
+    
+    <!-- Ripple effects -->
+    <color name="ripple_light">@color/ripple_dark</color>
+</resources>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <!-- Welcome Animation -->
+    <ImageView
+        android:id="@+id/lottie_welcome"
+        android:layout_width="280dp"
+        android:layout_height="280dp"
+        android:src="@drawable/ic_celebration"
+        android:scaleType="centerInside" />
+
+    <!-- Welcome Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:gravity="center"
+        android:text="Welcome to PartyMaker!"
+        android:textAppearance="@style/TextAppearance.PartyMaker.Headline1"
+        android:textColor="@color/primary_gradient_start" />
+
+    <!-- Welcome Description -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:alpha="0.8"
+        android:gravity="center"
+        android:text="Plan unforgettable events with friends"
+        android:textAppearance="@style/TextAppearance.PartyMaker.Body1"
+        android:textColor="@color/neutral_700" />
+
+</LinearLayout>

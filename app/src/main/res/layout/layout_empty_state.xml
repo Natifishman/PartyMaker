@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="32dp">
+
+    <!-- Empty State Animation -->
+    <ImageView
+        android:id="@+id/lottie_empty_state"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_party_icon"
+        android:scaleType="centerInside"
+        android:alpha="0.5" />
+
+    <!-- Empty State Title -->
+    <TextView
+        android:id="@+id/tv_empty_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:text="@string/empty_groups_title"
+        android:textAppearance="@style/TextAppearance.PartyMaker.Headline2"
+        android:textColor="@color/neutral_900" />
+
+    <!-- Empty State Description -->
+    <TextView
+        android:id="@+id/tv_empty_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/empty_groups_message"
+        android:textAppearance="@style/TextAppearance.PartyMaker.Body1"
+        android:textColor="@color/neutral_500" />
+
+    <!-- Call to Action Button -->
+    <com.example.partymaker.ui.components.PartyButton
+        android:id="@+id/btn_empty_action"
+        style="@style/Widget.PartyMaker.Button.Filled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/primary_gradient_start"
+        android:text="@string/create_party"
+        app:icon="@drawable/ic_add"
+        app:iconGravity="start" />
+
+</LinearLayout>

@@ -26,6 +26,11 @@
     <!-- Material You Text Input Styles -->
     <!-- Material You Chip Styles -->
     <!-- Modern Typography Styles -->
+    <!-- Base PartyMaker Text Appearance -->
+    <style name="TextAppearance.PartyMaker" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    
     <style name="TextAppearance.PartyMaker.TitleLarge" parent="TextAppearance.Material3.TitleLarge">
         <item name="android:textColor">?attr/colorOnSurface</item>
     </style>
@@ -61,10 +66,240 @@
     </style>
 
     <!-- Additional Typography Styles for Enterprise UI -->
+    <!-- Headlines using system fonts -->
+    <style name="TextAppearance.PartyMaker.Headline1">
+        <item name="android:textSize">32sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">-0.02</item>
+        <item name="android:lineSpacingMultiplier">1.2</item>
+        <item name="android:textColor">@color/neutral_900</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.Headline2">
+        <item name="android:textSize">28sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">-0.01</item>
+        <item name="android:textColor">@color/neutral_900</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.Headline3">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textColor">@color/neutral_900</item>
+    </style>
+    
+    <!-- Body text using system fonts -->
+    <style name="TextAppearance.PartyMaker.Body1">
+        <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:lineSpacingMultiplier">1.5</item>
+        <item name="android:textColor">@color/neutral_700</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.Body2">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:lineSpacingMultiplier">1.4</item>
+        <item name="android:textColor">@color/neutral_700</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.Button">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.Caption">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/neutral_500</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.DisplayLarge" parent="TextAppearance.Material3.DisplayLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.DisplayMedium" parent="TextAppearance.Material3.DisplayMedium">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:letterSpacing">-0.02</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.HeadlineLarge" parent="TextAppearance.Material3.HeadlineLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:letterSpacing">-0.01</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.HeadlineMedium" parent="TextAppearance.Material3.HeadlineMedium">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.TitleMedium" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:letterSpacing">0.02</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.TitleSmall" parent="TextAppearance.Material3.TitleSmall">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:letterSpacing">0.03</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.LabelLarge" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:letterSpacing">0.04</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.LabelMedium" parent="TextAppearance.Material3.LabelMedium">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.LabelSmall" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+    
+    <!-- Enhanced Button Styles -->
+    <style name="Widget.PartyMaker.Button.Filled" parent="Widget.Material3.Button">
+        <item name="cornerRadius">12dp</item>
+        <item name="backgroundTint">?attr/colorPrimary</item>
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="elevation">3dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+    
+    <style name="Widget.PartyMaker.Button.Outlined" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="cornerRadius">12dp</item>
+        <item name="strokeColor">?attr/colorOutline</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+    
+    <style name="Widget.PartyMaker.Button.Text" parent="Widget.Material3.Button.TextButton">
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+    
+    <style name="Widget.PartyMaker.Button.Icon" parent="Widget.Material3.Button.IconButton">
+        <item name="android:minWidth">48dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+    
     <!-- Chip Styles -->
-    <!-- Navigation styles removed due to compatibility issues -->
-
-    <!-- Bottom Navigation Style -->
+    <style name="Widget.PartyMaker.Chip.Filter" parent="Widget.Material3.Chip.Filter">
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipMinHeight">32dp</item>
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+    
+    <style name="Widget.PartyMaker.Chip.Suggestion" parent="Widget.Material3.Chip.Suggestion">
+        <item name="chipCornerRadius">16dp</item>
+        <item name="chipMinHeight">32dp</item>
+    </style>
+    
+    <!-- Text Input Styles -->
+    <style name="Widget.PartyMaker.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxCornerRadiusTopStart">12dp</item>
+        <item name="boxCornerRadiusTopEnd">12dp</item>
+        <item name="boxCornerRadiusBottomStart">12dp</item>
+        <item name="boxCornerRadiusBottomEnd">12dp</item>
+        <item name="boxStrokeColor">?attr/colorOutline</item>
+        <item name="hintTextColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+    
+    <style name="Widget.PartyMaker.TextInputEditText" parent="Widget.Material3.TextInputEditText.OutlinedBox">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    
     <!-- Dialog Styles -->
-    <!-- Navigation styles removed due to compatibility issues -->
+    <style name="ThemeOverlay.PartyMaker.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="alertDialogStyle">@style/Widget.PartyMaker.Dialog</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/TextAppearance.PartyMaker.Dialog.Title</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/TextAppearance.PartyMaker.Dialog.Body</item>
+    </style>
+    
+    <style name="Widget.PartyMaker.Dialog" parent="MaterialAlertDialog.Material3">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.PartyMaker.Dialog</item>
+        <item name="android:backgroundTint">?attr/colorSurface</item>
+    </style>
+    
+    <style name="ShapeAppearance.PartyMaker.Dialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">28dp</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.Dialog.Title" parent="TextAppearance.Material3.HeadlineSmall">
+        <item name="android:textColor">?attr/colorOnSurface</item>
+    </style>
+    
+    <style name="TextAppearance.PartyMaker.Dialog.Body" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">?attr/colorOnSurfaceVariant</item>
+    </style>
+    
+    <!-- Bottom Navigation Style -->
+    <style name="Widget.PartyMaker.BottomNavigationView" parent="Widget.Material3.BottomNavigationView">
+        <item name="itemIconTint">@color/bottom_nav_item_color</item>
+        <item name="itemTextColor">@color/bottom_nav_item_color</item>
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemActiveIndicatorStyle">@style/Widget.PartyMaker.NavigationView.ActiveIndicator</item>
+    </style>
+    
+    <style name="Widget.PartyMaker.NavigationView.ActiveIndicator" parent="">
+        <item name="android:color">?attr/colorPrimaryContainer</item>
+        <item name="android:width">64dp</item>
+        <item name="android:height">32dp</item>
+    </style>
+    
+    <!-- Snackbar Style -->
+    <style name="Widget.PartyMaker.Snackbar" parent="Widget.Material3.Snackbar">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.PartyMaker.Snackbar</item>
+        <item name="android:layout_margin">16dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.PartyMaker.Snackbar" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    
+    <!-- Progress Indicator Styles -->
+    <style name="Widget.PartyMaker.CircularProgressIndicator" parent="Widget.Material3.CircularProgressIndicator">
+        <item name="indicatorColor">?attr/colorPrimary</item>
+        <item name="trackColor">?attr/colorSurfaceVariant</item>
+        <item name="trackThickness">4dp</item>
+    </style>
+    
+    <style name="Widget.PartyMaker.LinearProgressIndicator" parent="Widget.Material3.LinearProgressIndicator">
+        <item name="indicatorColor">?attr/colorPrimary</item>
+        <item name="trackColor">?attr/colorSurfaceVariant</item>
+        <item name="trackThickness">4dp</item>
+    </style>
+    
+    <!-- Toolbar Style -->
+    <style name="Widget.PartyMaker.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="titleTextColor">?attr/colorOnSurface</item>
+        <item name="subtitleTextColor">?attr/colorOnSurfaceVariant</item>
+        <item name="navigationIconTint">?attr/colorOnSurface</item>
+    </style>
+    
+    <!-- Shape Appearances -->
+    <style name="ShapeAppearance.PartyMaker.SmallComponent" parent="ShapeAppearance.Material3.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">4dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.PartyMaker.MediumComponent" parent="ShapeAppearance.Material3.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+    </style>
+    
+    <style name="ShapeAppearance.PartyMaker.LargeComponent" parent="ShapeAppearance.Material3.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
 </resources>

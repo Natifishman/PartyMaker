@@ -48,53 +48,114 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * MainActivity - The primary hub for the PartyMaker application.
+ * 
+ * This activity serves as the main dashboard where users can:
+ * - View all their parties/groups
+ * - Search and filter parties
+ * - Navigate to create new parties
+ * - Access the AI assistant
+ * - Quick navigation to different app sections
+ * 
+ * Architecture:
+ * - MVVM Pattern: Uses MainActivityViewModel for business logic
+ * - Repository Pattern: Data access through GroupRepository
+ * - Observer Pattern: LiveData for reactive UI updates
+ * - Offline-First: Supports cached data viewing when offline
+ * 
+ * Key Features:
+ * - Real-time search filtering
+ * - Pull-to-refresh with custom animations
+ * - Bottom navigation for quick access
+ * - Floating action button for AI chat
+ * - Graceful error handling with user feedback
+ * 
+ * @author PartyMaker Team
+ * @version 2.0
+ * @since 1.0
+ */
 public class MainActivity extends AppCompatActivity {
 
+  /** Tag for logging - used for filtering logcat output */
   private static final String TAG = "MainActivity";
 
-  // UI Style Constants
+  // ==================== UI Style Constants ====================
+  /** Primary color for action bar gradient start */
   private static final String ACTION_BAR_START_COLOR = "#0E81D1";
+  /** Primary color for action bar gradient end */
   private static final String ACTION_BAR_END_COLOR = "#0E81D1";
+  /** Text color for action bar title */
   private static final String ACTION_BAR_TITLE_COLOR = "#FFFFFF";
+  /** Elevation for action bar shadow effect (in dp) */
   private static final float ACTION_BAR_ELEVATION = 15f;
 
-  // Business Constants
-  private static final long REFRESH_COOLDOWN_MS = 30000; // 30 seconds cooldown
+  // ==================== Business Logic Constants ====================
+  /** Minimum time between refresh operations to prevent API spam */
+  private static final long REFRESH_COOLDOWN_MS = 30000; // 30 seconds
+  /** Application title displayed in action bar */
   private static final String APP_TITLE = "My Parties";
 
-  // UI Animation and Timing Constants
+  // ==================== Animation Timing Constants ====================
+  /** Delay for general handler operations */
   private static final int HANDLER_DELAY_MS = 100;
+  /** Delay before navigation to ensure smooth transitions */
   private static final int NAVIGATION_DELAY_MS = 200;
+  /** Delay for FAB entrance animation */
   private static final int FAB_ANIMATION_DELAY_MS = 500;
+  /** Delay before redirecting to login after logout */
   private static final int LOGOUT_DELAY_MS = 1000;
+  /** Maximum duration for loading animation before timeout */
   private static final int GROUPS_LOADING_ANIMATION_DELAY_MS = 4000;
 
-  // SharedPreferences keys
+  // ==================== Persistence Constants ====================
+  /** SharedPreferences file name for app settings */
   private static final String PREFS_PARTY_MAKER = "PartyMakerPrefs";
+  /** Key for storing explicit login state (vs auto-login) */
   private static final String KEY_USER_EXPLICITLY_LOGGED_IN = "user_explicitly_logged_in";
 
-  // UI Components
+  // ==================== UI Components ====================
+  /** RecyclerView for displaying the list of user's parties */
   private RecyclerView groupsRecyclerView;
+  /** FAB for quick access to AI chat assistant */
   private FloatingActionButton chatFloatingActionButton;
+  /** SwipeRefreshLayout for pull-to-refresh functionality */
   private androidx.swiperefreshlayout.widget.SwipeRefreshLayout swipeRefreshLayout;
+  /** Root view of the activity layout */
   private View rootView;
+  /** Search input field for filtering parties */
   private EditText searchEditText;
+  /** Button to clear search text */
   private ImageView clearSearchButton;
 
-  // Data Components
+  // ==================== Data Components ====================
+  /** ViewModel for managing UI-related data lifecycle-aware */
   private MainActivityViewModel viewModel;
+  /** Current authenticated user's unique identifier */
   private String currentUserKey;
+  /** Adapter for binding group data to RecyclerView */
   private GroupAdapter groupAdapter;
+  /** Complete list of user's groups from data source */
   private List<Group> allGroups = new ArrayList<>();
+  /** Filtered subset of groups based on search criteria */
   private List<Group> filteredGroups = new ArrayList<>();
 
-  // UI State Management
+  // ==================== State Management ====================
+  /** Manages loading, error, and empty states UI */
   private LoadingStateManager loadingStateManager;
-
-  // State tracking
+  /** Flag to prevent duplicate loading toasts */
   private boolean hasShownLoadingToast = false;
+  /** Timestamp of last refresh operation for cooldown enforcement */
   private long lastRefreshTimeMillis = 0;
 
+  /**
+   * Activity lifecycle callback - Called when activity is first created.
+   * 
+   * Implements defensive programming with try-catch to prevent crashes.
+   * Orchestrates the entire activity initialization process.
+   * 
+   * @param savedInstanceState Bundle containing previously saved state
+   */
   @SuppressLint("ClickableViewAccessibility")
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -102,44 +163,97 @@ public class MainActivity extends AppCompatActivity {
     try {
       initializeActivity();
     } catch (Exception e) {
+      // Catch-all for unexpected errors to prevent app crashes
       Log.e(TAG, "Fatal error in onCreate", e);
       handleFatalError("An unexpected error occurred. Please restart the app.");
     }
   }
 
+  /**
+   * Orchestrates the complete activity initialization process.
+   * 
+   * Initialization order is critical:
+   * 1. Set content view
+   * 2. Enforce server configuration
+   * 3. Authenticate user
+   * 4. Initialize components
+   * 5. Setup UI
+   * 6. Load data
+   * 
+   * Each step depends on the previous one succeeding.
+   */
   private void initializeActivity() {
     setContentView(R.layout.activity_main);
 
+    // Ensure server is properly configured before any operations
     enforceServerConfiguration();
 
+    // Verify user is authenticated, redirect to login if not
     if (!authenticateUser()) {
-      return; // Exit if user authentication failed
+      return; // Exit early if authentication fails
     }
 
+    // Initialize data components and ViewModels
     initializeComponents();
+    
+    // Setup all UI elements and listeners
     setupUserInterface();
+    
+    // Load user's groups from repository
     loadInitialData();
   }
 
+  /**
+   * Initializes data components and ViewModels.
+   * 
+   * Uses ViewModelProvider to ensure ViewModel survives configuration changes
+   * like screen rotations.
+   */
   private void initializeComponents() {
+    // Initialize ViewModel with lifecycle-aware scope
     viewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+    
+    // Initialize all view references
     initializeViews();
   }
 
+  /**
+   * Configures all UI components and their interactions.
+   * 
+   * Sets up:
+   * - Action bar with custom styling
+   * - Event handlers for user interactions
+   * - Search functionality
+   * - Floating action button for AI chat
+   * - Bottom navigation bar
+   * - ViewModel observers for reactive UI
+   */
   private void setupUserInterface() {
-    setupActionBar();
-    setupEventHandlers();
-    setupSearchBar();
-    setupFloatingChatButton();
-    setupBottomNavigation();
-    observeViewModel();
+    setupActionBar();           // Configure top app bar
+    setupEventHandlers();       // Setup click and swipe listeners
+    setupSearchBar();          // Initialize search functionality
+    setupFloatingChatButton(); // Setup FAB for AI assistant
+    setupBottomNavigation();   // Configure bottom nav bar
+    observeViewModel();        // Setup LiveData observers
   }
 
+  /**
+   * Initiates the initial data load for the activity.
+   * 
+   * Loads user's groups from the repository through ViewModel.
+   * Shows loading state without toast (silent loading for initial load).
+   * Updates refresh timestamp to enforce cooldown period.
+   */
   private void loadInitialData() {
-    showLoadingState(false); // Show loading without toast
+    // Show loading animation without toast notification
+    showLoadingState(false);
 
     Log.d(TAG, "Loading groups for user: " + currentUserKey);
+    
+    // Trigger data load through ViewModel (true = force refresh from server)
     viewModel.loadUserGroups(currentUserKey, true);
+    
+    // Update timestamp for refresh cooldown
     updateLastRefreshTime();
   }
 

@@ -1,6 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Primary Colors -->
+    <!-- Brand Identity Colors -->
+    <color name="primary_gradient_start">#6C63FF</color>
+    <color name="primary_gradient_end">#4A43E0</color>
+    <color name="primary_surface">#F7F6FF</color>
+    
+    <!-- Accent Colors -->
+    <color name="accent_party">#FF6B6B</color>
+    <color name="accent_success">#4ECDC4</color>
+    <color name="accent_warning">#FFD93D</color>
+    
+    <!-- Semantic Colors -->
+    <color name="semantic_error">#FF4757</color>
+    <color name="semantic_info">#54A0FF</color>
+    <color name="semantic_success">#10B981</color>
+    
+    <!-- Neutral Palette -->
+    <color name="neutral_900">#0F172A</color>
+    <color name="neutral_700">#334155</color>
+    <color name="neutral_500">#64748B</color>
+    <color name="neutral_300">#CBD5E1</color>
+    <color name="neutral_100">#F1F5F9</color>
+    <color name="neutral_50">#F8FAFC</color>
+    
+    <!-- Dark Mode Colors -->
+    <color name="dark_background">#0F0F1E</color>
+    <color name="dark_surface">#1A1A2E</color>
+    <color name="dark_surface_variant">#252542</color>
+    
+    <!-- Primary Colors (Legacy) -->
     <color name="pink_100">#FFFFEEF4</color>
 
     <!-- Standard Colors -->
@@ -97,4 +125,120 @@
 
     <!-- Modern accent colors for various UI states -->
     <color name="modern_accent_teal">#00BCD4</color>
+    
+    <!-- Enterprise-Level Extended Color Palette -->
+    
+    <!-- Primary Blue Shades -->
+    <color name="blue_50">#E3F2FD</color>
+    <color name="blue_100">#BBDEFB</color>
+    <color name="blue_200">#90CAF9</color>
+    <color name="blue_300">#64B5F6</color>
+    <color name="blue_400">#42A5F5</color>
+    <color name="blue_500">#2196F3</color>
+    <color name="blue_600">#1E88E5</color>
+    <color name="blue_700">#1976D2</color>
+    <color name="blue_800">#1565C0</color>
+    <color name="blue_900">#0D47A1</color>
+    
+    <!-- Gray Shades for Surfaces -->
+    <color name="gray_50">#FAFAFA</color>
+    <color name="gray_100">#F5F5F5</color>
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_300">#E0E0E0</color>
+    <color name="gray_400">#BDBDBD</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_600">#757575</color>
+    <color name="gray_700">#616161</color>
+    <color name="gray_800">#424242</color>
+    <color name="gray_900">#212121</color>
+    
+    <!-- Semantic Colors -->
+    <color name="success_50">#E8F5E9</color>
+    <color name="success_100">#C8E6C9</color>
+    <color name="success_500">#4CAF50</color>
+    <color name="success_700">#388E3C</color>
+    <color name="success_900">#1B5E20</color>
+    
+    <color name="error_50">#FFEBEE</color>
+    <color name="error_100">#FFCDD2</color>
+    <color name="error_500">#F44336</color>
+    <color name="error_700">#D32F2F</color>
+    <color name="error_900">#B71C1C</color>
+    
+    <color name="warning_50">#FFF3E0</color>
+    <color name="warning_100">#FFE0B2</color>
+    <color name="warning_500">#FF9800</color>
+    <color name="warning_700">#F57C00</color>
+    <color name="warning_900">#E65100</color>
+    
+    <color name="info_50">#E1F5FE</color>
+    <color name="info_100">#B3E5FC</color>
+    <color name="info_500">#03A9F4</color>
+    <color name="info_700">#0288D1</color>
+    <color name="info_900">#01579B</color>
+    
+    <!-- Accent Colors -->
+    <color name="purple_500">#9C27B0</color>
+    <color name="purple_700">#7B1FA2</color>
+    <color name="teal_500">#009688</color>
+    <color name="teal_700">#00796B</color>
+    <color name="pink_500">#E91E63</color>
+    <color name="pink_700">#C2185B</color>
+    
+    <!-- Text Colors with Proper Contrast -->
+    <color name="text_primary_light">#212121</color>
+    <color name="text_secondary_light">#757575</color>
+    <color name="text_disabled_light">#9E9E9E</color>
+    <color name="text_hint_light">#BDBDBD</color>
+    
+    <color name="text_primary_dark">#FFFFFF</color>
+    <color name="text_secondary_dark">#B3B3B3</color>
+    <color name="text_disabled_dark">#757575</color>
+    <color name="text_hint_dark">#616161</color>
+    
+    <!-- Surface Colors -->
+    <color name="surface_light">#FFFFFF</color>
+    <color name="surface_elevated_light">#FAFAFA</color>
+    <color name="surface_dark">#121212</color>
+    <color name="surface_elevated_dark">#1E1E1E</color>
+    
+    <!-- Overlay Colors -->
+    <color name="scrim_light">#52000000</color>
+    <color name="scrim_dark">#80FFFFFF</color>
+    <color name="overlay_light">#1F000000</color>
+    <color name="overlay_dark">#33FFFFFF</color>
+    
+    <!-- Ripple Effects -->
+    <color name="ripple_light">#1F000000</color>
+    <color name="ripple_dark">#33FFFFFF</color>
+    <color name="ripple_primary">#330E81D1</color>
+    
+    <!-- Gradient Colors -->
+    <color name="gradient_start_primary">#0E81D1</color>
+    <color name="gradient_end_primary">#1976D2</color>
+    <color name="gradient_start_secondary">#00BCD4</color>
+    <color name="gradient_end_secondary">#00ACC1</color>
+    
+    <!-- Chat Message Colors -->
+    <color name="message_bubble_mine">#DCF8C6</color>
+    <color name="message_bubble_other">#FFFFFF</color>
+    <color name="message_bubble_ai">#E3F2FD</color>
+    
+    <!-- Status Indicator Colors -->
+    <color name="status_online">#4CAF50</color>
+    <color name="status_away">#FFC107</color>
+    <color name="status_busy">#F44336</color>
+    <color name="status_offline">#9E9E9E</color>
+    
+    <!-- Badge Colors -->
+    <color name="badge_new">#FF5252</color>
+    <color name="badge_count">#0E81D1</color>
+    
+    <!-- Shimmer Loading -->
+    <color name="shimmer_base">#E0E0E0</color>
+    <color name="shimmer_highlight">#F5F5F5</color>
+    
+    <!-- Divider Colors -->
+    <color name="divider_light">#E0E0E0</color>
+    <color name="divider_dark">#424242</color>
 </resources>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Dark Theme for PartyMaker -->
+    <style name="Theme.PartyMaker" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Dark Mode Primary Colors -->
+        <item name="colorPrimary">@color/primary_gradient_start</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/primary_surface</item>
+        <item name="colorOnPrimaryContainer">@color/white</item>
+        
+        <!-- Dark Mode Secondary Colors -->
+        <item name="colorSecondary">@color/accent_party</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorSecondaryContainer">@color/dark_surface_variant</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
+        
+        <!-- Dark Mode Tertiary Colors -->
+        <item name="colorTertiary">@color/accent_success</item>
+        <item name="colorOnTertiary">@color/white</item>
+        <item name="colorTertiaryContainer">@color/dark_surface_variant</item>
+        <item name="colorOnTertiaryContainer">@color/white</item>
+        
+        <!-- Error Colors -->
+        <item name="colorError">@color/semantic_error</item>
+        <item name="colorOnError">@color/white</item>
+        <item name="colorErrorContainer">@color/semantic_error</item>
+        <item name="colorOnErrorContainer">@color/white</item>
+        
+        <!-- Background and Surface -->
+        <item name="android:colorBackground">@color/dark_background</item>
+        <item name="colorOnBackground">@color/text_primary_dark</item>
+        <item name="colorSurface">@color/dark_surface</item>
+        <item name="colorOnSurface">@color/text_primary_dark</item>
+        <item name="colorSurfaceVariant">@color/dark_surface_variant</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary_dark</item>
+        
+        <!-- Outlines -->
+        <item name="colorOutline">@color/neutral_500</item>
+        <item name="colorOutlineVariant">@color/neutral_700</item>
+        
+        <!-- Material 3 specific attributes -->
+        <item name="android:colorControlHighlight">@color/primary_gradient_start</item>
+        
+        <!-- Status bar for dark mode -->
+        <item name="android:statusBarColor">@color/dark_background</item>
+        <item name="android:windowLightStatusBar">false</item>
+        
+        <!-- Navigation bar for dark mode -->
+        <item name="android:navigationBarColor">@color/dark_background</item>
+        <item name="android:windowLightNavigationBar">false</item>
+        
+        <!-- Surface container colors for Material 3 -->
+        <item name="colorSurfaceContainerLowest">@color/dark_background</item>
+        <item name="colorSurfaceContainerLow">@color/dark_surface</item>
+        <item name="colorSurfaceContainer">@color/dark_surface</item>
+        <item name="colorSurfaceContainerHigh">@color/dark_surface_variant</item>
+        <item name="colorSurfaceContainerHighest">@color/dark_surface_variant</item>
+    </style>
+</resources>

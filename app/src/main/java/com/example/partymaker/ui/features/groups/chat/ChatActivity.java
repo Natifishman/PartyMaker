@@ -41,56 +41,130 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * ChatActivity - Real-time messaging interface for group conversations.
+ * 
+ * This activity provides a modern chat experience with:
+ * - Real-time message synchronization
+ * - End-to-end encryption support
+ * - AI assistant integration
+ * - Material Design 3 UI components
+ * - Offline message queueing
+ * 
+ * Architecture:
+ * - MVVM Pattern: Uses GroupChatViewModel for business logic
+ * - Repository Pattern: Messages handled through FirebaseServerClient
+ * - Observer Pattern: LiveData for real-time updates
+ * - Encryption: GroupMessageEncryption for secure messaging
+ * 
+ * Key Features:
+ * - RecyclerView-based message display
+ * - Pull-to-refresh for message history
+ * - Typing indicators
+ * - Message status (sent/delivered/read)
+ * - AI chatbot integration via attachment button
+ * - Automatic retry mechanism for failed messages
+ * 
+ * Security:
+ * - Messages encrypted using group-specific keys
+ * - User authentication required
+ * - Server-side message validation
+ * 
+ * @author PartyMaker Team
+ * @version 2.0
+ * @since 1.0
+ */
 public class ChatActivity extends AppCompatActivity {
 
+  /** Tag for logging and debugging */
   private static final String TAG = "ChatActivity";
+  
+  // ==================== Retry Configuration ====================
+  /** Maximum number of retry attempts for failed operations */
   private static final int MAX_RETRY_ATTEMPTS = 3;
+  /** Initial delay before first retry (exponential backoff) */
   private static final int FIRST_RETRY_DELAY_MS = 1000;
+  /** Range for generating random message IDs */
   private static final int RANDOM_RANGE = 10000;
+  
+  // ==================== Timeout Configuration ====================
+  /** Timeout for GPT API requests */
   private static final int GPT_TIMEOUT_MS = 3000;
+  /** Delay before hiding animation */
   private static final long ANIMATION_HIDE_DELAY_MS = 3000L;
+  /** Delay for success animation display */
   private static final long SUCCESS_ANIMATION_DELAY_MS = 2500L;
+  
+  /** Handler for retry operations on main thread */
   private final Handler retryHandler = new Handler(Looper.getMainLooper());
+  // ==================== UI Components ====================
+  /** RecyclerView for displaying chat messages */
   private RecyclerView recyclerView;
+  /** Input field for composing messages */
   private TextInputEditText messageEditText;
+  /** FAB button for sending messages */
   private FloatingActionButton sendButton;
+  /** Button for attachments and AI assistant */
   private ImageButton attachButton;
+  /** TextView displaying party name in toolbar */
   private TextView tvPartyName;
+  /** TextView displaying member count in toolbar */
   private TextView tvPartyMembers;
+  
+  // ==================== Data Components ====================
+  /** Unique identifier for the current group/party */
   private String groupKey;
+  /** Map of message IDs for this group */
   private HashMap<String, Object> messageKeys;
+  /** Client for server communication */
   private FirebaseServerClient serverClient;
+  /** Adapter for binding messages to RecyclerView */
   private ChatRecyclerAdapter adapter;
+  /** Current authenticated user's ID */
   private String userKey;
+  /** ViewModel for managing chat data */
   private GroupChatViewModel viewModel;
+  
+  // ==================== Security Components ====================
+  /** Manager for group encryption keys */
   private GroupKeyManager groupKeyManager;
+  /** Encryption handler for secure messaging */
   private GroupMessageEncryption groupEncryption;
 
+  /**
+   * Activity lifecycle - onCreate
+   * 
+   * Initializes the chat interface and establishes connections.
+   * Order of initialization is critical for proper functionality.
+   * 
+   * @param savedInstanceState Bundle containing saved state
+   */
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     Log.d(TAG, "ChatActivity onCreate called");
     setContentView(R.layout.activity_party_chat);
 
-    // Initialize server client
+    // Step 1: Initialize server communication client
     serverClient = FirebaseServerClient.getInstance();
 
-    // Initialize ViewModel
+    // Step 2: Initialize ViewModel for data management
     viewModel = new ViewModelProvider(this).get(GroupChatViewModel.class);
     setupViewModelObservers();
 
-    // Actionbar settings
+    // Step 3: Configure action bar appearance
     ActionBar actionBar = getSupportActionBar();
     if (actionBar != null) {
       actionBar.setTitle("Chat");
       actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#0081d1")));
     }
 
-    // Get data from intent directly
+    // Step 4: Extract data from intent
+    // Priority: Direct intent extras > ExtrasMetadata
     Log.d(TAG, "Getting extras from intent");
     Intent intent = getIntent();
 
-    // Get groupKey directly from intent first
+    // Try direct intent extra first (backwards compatibility)
     groupKey = intent.getStringExtra("GroupKey");
     Log.d(TAG, "groupKey from direct intent extra: " + groupKey);
 

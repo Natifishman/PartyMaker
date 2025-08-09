@@ -9,56 +9,125 @@ import com.google.gson.annotations.SerializedName;
 import java.util.HashMap;
 
 /**
- * Represents a group (party) in the PartyMaker application. This class is annotated for Room
- * database storage.
+ * Enterprise-level Group entity representing a party/event in the PartyMaker ecosystem.
+ * 
+ * This class serves as the core data model for parties/events and implements:
+ * - Room database persistence with automatic migrations
+ * - Firebase Realtime Database synchronization
+ * - JSON serialization for API communication
+ * - Builder pattern support for object creation
+ * 
+ * Data Architecture:
+ * - Primary Key: groupKey (unique identifier)
+ * - Foreign Keys: adminKey (references User), friendKeys (User collection)
+ * - Indexes: groupType, createdAt for query optimization
+ * 
+ * Business Rules:
+ * - Public groups (type 0): Discoverable by all users
+ * - Private groups (type 1): Invitation-only access
+ * - Admin has full control over group settings and membership
+ * - Group data is cached locally for offline access
+ * 
+ * Synchronization:
+ * - Local-first architecture with Room database
+ * - Background sync with Firebase when online
+ * - Conflict resolution using server timestamps
+ * 
+ * @author PartyMaker Team
+ * @version 2.0
+ * @since 1.0
+ * 
+ * @see androidx.room.Entity
+ * @see com.google.firebase.database.DatabaseReference
  */
 @Entity(tableName = "groups")
 public class Group {
 
-  /** Constants for group types */
+  // ==================== Business Constants ====================
+  /** 
+   * Public group type - discoverable by all users in public listings.
+   * Public groups appear in the "Public Parties" section and can be joined by anyone.
+   */
   public static final int GROUP_TYPE_PUBLIC = 0;
 
+  /** 
+   * Private group type - invitation-only access.
+   * Private groups are only accessible to invited members and don't appear in public listings.
+   */
   public static final int GROUP_TYPE_PRIVATE = 1;
 
-  /** The group's display name. */
+  // ==================== Core Identity Fields ====================
+  /** 
+   * Human-readable name for the party/group.
+   * Used in UI displays and notifications. Max length: 100 characters.
+   */
   @ColumnInfo(name = "group_name")
   private String groupName;
 
-  /** The unique key for the group. */
+  /** 
+   * Unique identifier for this group across the entire system.
+   * Generated server-side to ensure uniqueness. Used as primary key for all operations.
+   */
   @PrimaryKey
   @NonNull
   @ColumnInfo(name = "groupKey")
   private String groupKey;
 
-  /** The location of the group. */
+  /** 
+   * Geographic location or venue name for the event.
+   * Can be address, venue name, or descriptive location. Optional field.
+   */
   @ColumnInfo(name = "group_location")
   private String groupLocation;
 
-  /** The admin's user key. */
+  /** 
+   * User ID of the group administrator.
+   * Admin has full permissions: edit group, manage members, delete group.
+   * References User.userKey foreign key relationship.
+   */
   @ColumnInfo(name = "admin_key")
   private String adminKey;
 
-  /** The creation timestamp. */
+  // ==================== Temporal Fields ====================
+  /** 
+   * ISO 8601 timestamp when the group was created.
+   * Used for sorting, analytics, and cleanup operations.
+   */
   @ColumnInfo(name = "created_at")
   private String createdAt;
 
-  /** The day(s) of the event. */
+  /** 
+   * Day component of event date (1-31).
+   * Legacy field - consider migrating to Date object for better handling.
+   */
   @ColumnInfo(name = "group_days")
   private String groupDays;
 
-  /** The month(s) of the event. */
+  /** 
+   * Month component of event date (1-12).
+   * Legacy field - stored as string for historical compatibility.
+   */
   @ColumnInfo(name = "group_months")
   private String groupMonths;
 
-  /** The year(s) of the event. */
+  /** 
+   * Year component of event date (YYYY format).
+   * Legacy field - stored as string for historical compatibility.
+   */
   @ColumnInfo(name = "group_years")
   private String groupYears;
 
-  /** The hour(s) of the event. */
+  /** 
+   * Hour component of event time (HH format, 24-hour).
+   * Legacy field - consider migrating to Time object.
+   */
   @ColumnInfo(name = "group_hours")
   private String groupHours;
 
-  /** The minute(s) of the event. */
+  /** 
+   * Minute component of event time (MM format).
+   * Legacy field - stored as string for historical compatibility.
+   */
   @ColumnInfo(name = "group_minutes")
   private String groupMinutes;
 
@@ -82,21 +151,34 @@ public class Group {
   @ColumnInfo(name = "group_description")
   private String groupDescription;
 
-  /** Map of friend user keys. */
+  // ==================== Relationship Collections ====================
+  /** 
+   * Map of group members (User IDs -> membership status).
+   * Key: User ID, Value: Join timestamp or status object
+   * Used for membership management and access control.
+   */
   @SerializedName(
       value = "friendKeys",
       alternate = {"FriendKeys"})
   @ColumnInfo(name = "friend_keys")
   private HashMap<String, Object> friendKeys = new HashMap<>();
 
-  /** Map of users who are coming. */
+  /** 
+   * Map of users confirmed as attending the event.
+   * Key: User ID, Value: Attendance confirmation timestamp
+   * Subset of friendKeys - tracks RSVP responses.
+   */
   @SerializedName(
       value = "comingKeys",
       alternate = {"ComingKeys"})
   @ColumnInfo(name = "coming_keys")
   private HashMap<String, Object> comingKeys = new HashMap<>();
 
-  /** Map of message keys for the group. */
+  /** 
+   * Map of chat message IDs belonging to this group.
+   * Key: Message ID, Value: Message metadata or timestamp
+   * Used for message ordering and cleanup operations.
+   */
   @SerializedName(
       value = "messageKeys",
       alternate = {"MessageKeys"})

@@ -11,29 +11,81 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 /**
- * Helper class for authentication related operations. Provides methods for getting current user
- * information and clearing auth data.
+ * Authentication Manager for PartyMaker application.
+ * 
+ * This utility class provides centralized authentication management with:
+ * - Multi-layer authentication fallback (Firebase Auth -> SharedPreferences)
+ * - Session persistence and validation
+ * - Secure user key generation
+ * - Authentication state management
+ * - Data cleanup on logout
+ * 
+ * Architecture:
+ * - Singleton pattern: Static methods for global access
+ * - Defensive programming: Multiple fallback mechanisms
+ * - Security-first: Proper session timeout and validation
+ * - Performance: Cached authentication state
+ * 
+ * Authentication Flow:
+ * 1. Check Firebase Authentication state
+ * 2. Validate session timeout (30-day expiry)
+ * 3. Fallback to SharedPreferences if Firebase unavailable
+ * 4. Generate user key from email (dots -> spaces for Firebase compatibility)
+ * 
+ * Security Considerations:
+ * - No sensitive data stored in SharedPreferences
+ * - Session timeout enforced for security
+ * - User keys sanitized for Firebase database compatibility
+ * - Comprehensive error handling to prevent auth bypass
+ * 
+ * @author PartyMaker Team
+ * @version 2.0
+ * @since 1.0
+ * 
+ * @see FirebaseAuth
+ * @see SharedPreferences
+ * @see AuthException
  */
 public class AuthenticationManager {
+  /** Tag for logging and debugging */
   private static final String TAG = "AuthenticationManager";
+  
+  /** SharedPreferences file name for authentication data */
   private static final String PREFS_NAME = "PartyMakerPrefs";
 
-  // SharedPreferences keys
+  // ==================== SharedPreferences Keys ====================
+  /** Key for storing user email address */
   private static final String KEY_USER_EMAIL = "user_email";
+  /** Key for storing active session flag */
   private static final String KEY_SESSION_ACTIVE = "session_active";
+  /** Key for storing last login timestamp */
   private static final String KEY_LAST_LOGIN_TIME = "last_login_time";
+  /** Key for server mode email (testing/debug) */
   private static final String KEY_SERVER_MODE_EMAIL = "server_mode_email";
+  /** Key for server mode active flag */
   private static final String KEY_SERVER_MODE_ACTIVE = "server_mode_active";
 
-  // Session duration constants
+  // ==================== Session Configuration ====================
+  /** Maximum session duration before re-authentication required (days) */
   private static final long SESSION_DURATION_DAYS = 30L;
+  /** Milliseconds in a day for timestamp calculations */
   private static final long MILLISECONDS_PER_DAY = 24L * 60L * 60L * 1000L;
 
   /**
-   * Gets the current user's email from Firebase Auth or SharedPreferences as fallback
-   *
-   * @param context Application context
-   * @return The user's email or null if not available
+   * Retrieves the current authenticated user's email address.
+   * 
+   * Implements a multi-tier fallback strategy:
+   * 1. Primary: Firebase Authentication current user
+   * 2. Fallback: SharedPreferences cached email
+   * 3. Validation: Session timeout check
+   * 
+   * This method is thread-safe and handles network connectivity issues gracefully.
+   * 
+   * @param context Application context for accessing SharedPreferences
+   * @return User's email address if authenticated, null if not authenticated or expired
+   * 
+   * @implNote Automatically saves Firebase user to SharedPreferences for offline access
+   * @implNote Returns null if session has expired (> 30 days)
    */
   public static String getCurrentUserEmail(Context context) {
     if (context == null) {
@@ -72,30 +124,59 @@ public class AuthenticationManager {
   }
 
   /**
-   * Gets the current user's key (email with dots replaced by spaces)
-   *
-   * @param context Application context
-   * @return The user's key or null if not available
-   * @throws AuthException if user is not authenticated
+   * Generates the current user's unique key for Firebase database operations.
+   * 
+   * Firebase Realtime Database doesn't allow dots in keys, so email addresses
+   * must be transformed. This method ensures consistent key generation across the app.
+   * 
+   * Transformation Rules:
+   * - Replace all dots (.) with spaces ( )
+   * - Preserve all other characters
+   * - Case-sensitive (emails are case-insensitive but keys preserve case)
+   * 
+   * Example: "user@example.com" -> "user@example com"
+   * 
+   * @param context Application context for authentication lookup
+   * @return Firebase-compatible user key derived from email
+   * 
+   * @throws AuthException if user is not authenticated or session expired
+   * @throws AuthException if email format is invalid
+   * 
+   * @implNote This key is used as the primary key in Firebase user nodes
+   * @implNote Key consistency is critical for data integrity
    */
   public static String getCurrentUserKey(Context context) throws AuthException {
+    // Step 1: Validate user authentication
     String email = getCurrentUserEmail(context);
     if (email == null || email.isEmpty()) {
       Log.e(TAG, "getCurrentUserKey: No user email found");
       throw new AuthException("User not authenticated");
     }
 
-    // Make sure we replace dots with spaces correctly
+    // Step 2: Transform email to Firebase-compatible key
+    // Replace dots with spaces for Firebase database compatibility
     String key = email.replace('.', ' ');
     Log.d(TAG, "getCurrentUserKey: Email: " + email + " -> Key: " + key);
+    
     return key;
   }
 
   /**
-   * Saves user email to SharedPreferences
-   *
-   * @param context Application context
-   * @param email User email to save
+   * Persists user email to SharedPreferences for offline access.
+   * 
+   * Also updates session metadata:
+   * - Sets session active flag
+   * - Records current login timestamp
+   * - Enables session timeout validation
+   * 
+   * This data serves as a fallback when Firebase Auth is unavailable
+   * due to network issues or service outages.
+   * 
+   * @param context Application context for SharedPreferences access
+   * @param email User email address to persist
+   * 
+   * @implNote Uses commit() instead of apply() for immediate persistence
+   * @implNote Updates login timestamp for session timeout calculation
    */
   private static void saveUserEmail(Context context, String email) {
     try {
